@@ -621,478 +621,671 @@ if section == "Week 2":
     st.title("Week 2")
     
     w2_sub = st.radio("Lectures",
-            ["Lecture 4", "Lecture 5"])
+            ["Lecture 4 (raw)", "Lecture 4 (AI structured and annotated)", "Lecture 5"])
     
-    if w2_sub == "Lecture 4":
+    if w2_sub == "Lecture 4 (raw)":
     
-        st.header("Lecture 4: Range, Null Space, and Rank–Nullity")
+        st.header("Lecture 4:")
         st.subheader("Tuesday, October 7, 2025")
-
         st.markdown(r"""
-        ### Topics
-        - Range and Null Spaces
-        - Column Space and Basis
-        - Sum and Direct Sum of Subspaces
-        - Rank–Nullity Theorem
-        - Vector Norms
+             
+        #### 1) Triangle Inequality
+        $$
+        ||V_1 + V_1|| = ||V_1|| + ||V_1||
+        $$    
+        
+        #### Scalar Multiplication
+        $$
+        \forall \alpha \in F, \quad u \in V
+        $$
+        
+        #### Example
+        $$
+        ||v|| = \sum_{i=1}^n|\alpha_1|\\
+        ||x||_2 = \left(\sum_{i=1}^n |X_1|^2\right)^{\frac{1}{2}} = 2 \text{ norm}\\
+        ||x||_p = \left(\sum_{i=1}^n |x_1|^p\right)^{V_p}\\
+        ||x||_\infty = \text{max} |x_i| = \infty \text{ norm}
+        $$
+        
+        #### Note:
+        $$
+        U + W = V\\
+        \text{dim}(u + \text{dim}(w=\text{dim}(V))
+        $$
+        
+        #### Rank:
+        The rank of a matrix is the dimension of its range space.
+        $$
+        Rank(A) := \text{dim}(R(A))
+        $$
+        if a matrix is one full
+        #### 1) Full row rank $\implies$ All row of A is linearly independent
+        
+        #### 2) Full column rank $\implies$ All columns are linearly independent
+         
+        ---
+        ### Norms:
+        
+        #### Linear Spaces
+        Let $(V, F)$ be vector spaces to be a norm linear space, if there $\exists$
+        
+        **Map**
+        $$
+        ||\cdot|| \to V \to R^+
+        $$
+        
+        $$
+        U + W = \left\{ \begin{bmatrix}2\\0\\0 \end{bmatrix}, \begin{bmatrix}1\\1\\0 \end{bmatrix}, \begin{bmatrix}2\\1\\0 \end{bmatrix}, \begin{bmatrix}-1\\0\\1 \end{bmatrix}\right\}
+        $$
+        
+        $$
+        \begin{bmatrix} 2 & 1 & 2 & -1 \\0& 1 & 1 & 0 \\ 0 & 0 & 0 & 1\end{bmatrix}
+        $$
+        
+        Row reduction:
+        $$
+        \text{span}\left\{\begin{bmatrix}2\\0\\0 \end{bmatrix}, \begin{bmatrix}1\\1\\0 \end{bmatrix}, \begin{bmatrix}-1\\0\\1 \end{bmatrix}\right\} \in R^3
+        $$
+        
+        ---
+        ### Direct Sum
+        A space $V$ is a direct sum of $U$ and $W$, denoted $\boxed{V = U \oplus W}$, if $U \cap W = \{0\}$.
+        
+        $V = U + W$ and ... and $U$ and $W = \{0\}$
+        
+        #### Example
+        $$
+        U = \text{span}\left\{\begin{bmatrix}1\\1\\0\end{bmatrix}, \begin{bmatrix}2\\0\\0\end{bmatrix}\right\}\\
+        W = \{(x, y, z \quad x-2y + z = 0\}\\
+        = \left\{(x, y, z)\begin{bmatrix}2yz\\y\\z\end{bmatrix}\right\}
+        $$
+        now the $F, z, y$ are free
+        
+        **Simplify**
+        $$
+        \begin{align*}
+        &= \left\{(x, y, z): \begin{bmatrix}x\\y\\z\end{bmatrix}  - y\begin{bmatrix}2\\1\\0\end{bmatrix} + z\begin{bmatrix}-1\\0\\1\end{bmatrix} \quad y, z \in R \right\}\\
+        &= \text{span}\left(\begin{bmatrix}2\\1\\0\end{bmatrix}, \begin{bmatrix}-1\\0\\1\end{bmatrix}\right)\\
+        &\implies U + W 
+        \end{align*}
+        $$
+        
+        The range $A$ is the span of the original columns direct.
+        
+        **For example**
+        $$
+        \boxed{
+        R(A) = \text{span}\left\{\begin{bmatrix}1\\0\\0\end{bmatrix}, \begin{bmatrix}-1\\1\\0\end{bmatrix}, \begin{bmatrix}0\\-1\\1\end{bmatrix}\right\}
+        }
+        \\
+        = \text{span}(1, 1-x, -x + x^2)
+        $$
+        
+        ---
+        ### Sum of Vector Subspaces
+        Let $(V, F)$ be a vector space and $u$ and $w$ be subspace of vector space $V$.
+        
+        Define the sum of vector subspace.
+        $$
+        U + W = \left\{u + w \quad u \in U, w \in W\right\} \subseteq V
+        $$
+        These are all elements of $u+w$.
+        
+        All possible combinations sums of elements $U$ and $W$
+        
+        $$
+        \begin{align*}
+        \implies N(A) = \text{span}\left(\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} \quad Ax = 0\right)\\
+        = \underbrace{\text{span}\left(\begin{bmatrix}1\\1\\1\\1\end{bmatrix}\right)}_{\text{coordinate representation in }B}
+        \end{align*}
+        $$
+        **Check:** $A\left(\begin{bmatrix}1&1\\1&1\end{bmatrix}\right) = 0$
+        
+        **Range Space:**
+        $$
+        R(A)?
+        $$
+        
+        **Recall:**
+        $$
+        R(A) :=\{b: \exists x \in u, Ax =b, b \in V\}
+        $$
+        
+        #### Example
+        The range of $A = \text{span}$
+        
+        Remember. This direction of the columns of A linear combinations
+        
+        ---
+        #### What is the Null Space of $N(A)$?
+        - Use the definition of the Null space of a matrix A
+        $$
+        N(A) := \{x \cdot Ax = 0\}
+        $$
+        
+        Apply this to our example, what are $x$ such that
+        $$
+        A = \begin{bmatrix}1 & -1 & 0 & 0 \\0 & 1 & -1 & 0\\0 & 0 & 1 & -1\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} = \begin{bmatrix}0\\0\\0\end{bmatrix}\\
+        x_1 - x_4 = 0\\
+        x_2 - x_4 = 0\\
+        x_3 - x_4 = 0\\
+        $$
+        
+        $$
+        \implies \begin{bmatrix}1&0&0&-1\\0&1&0&-1\\0 & 1&0&-1 \end{bmatrix}\begin{bmatrix}0\\0\\0\end{bmatrix}
+        $$
+        
+        We can easily compute the transformation of any matrix if we write in coordinate form in the basis B.
+        
+        $$
+        C = \begin{bmatrix}1 & 2\\0&1\end{bmatrix} = 1 \cdot \begin{bmatrix}1 & 0 \\0 & 0\end{bmatrix} + 2\begin{bmatrix}0 & 1 \\0 & 0\end{bmatrix}
+        + 0\begin{bmatrix}0 & 0 \\1 & 0\end{bmatrix} + 1 \begin{bmatrix}0 & 0 \\0 & 1\end{bmatrix}
+        $$
+        Coefficient with $B_1$
+        
+        $$
+        A(C) = [A\cdot C] = \begin{bmatrix}1&-1&0&0\\0&1&-1&0\\0&0&1&-1\end{bmatrix}\begin{bmatrix}1\\2\\0\\1\end{bmatrix}\\
+        = \begin{bmatrix}-1\\2\\-1\end{bmatrix}\\
+        \implies 1 -2x - x^2
+        $$
+        
+        $A\begin{bmatrix}1&0\\0&0\end{bmatrix}\rightarrow$ Maps to constant $1$
+        $$
+        \boxed{
+        \left[[1]_{B_1}, [-1+x]_{B_2}, [-x+x^2]_{B_3}, [-x^2]_{B_4}\right]
+        }
+        $$
+        $$
+        \left[\underbrace{\begin{bmatrix}1\\0\\0\end{bmatrix}}_{\text{coefficient vector of }B_1}, \dots\right]
+        $$
+        $$
+        \begin{bmatrix}
+        1&-1&0&0\\
+        0&1&-1&0\\
+        0&0&1&-1
+        \end{bmatrix} \in R^{3\times 4}
+        $$
+        This is a diagonal
+        
+        #### Consider:
+        $$
+        B_1 = \left\{\begin{bmatrix}1 & 0 \\0 & 0\end{bmatrix}, \begin{bmatrix}0 & 1 \\0 & 0\end{bmatrix}, \begin{bmatrix}0 & 0 \\1 & 0\end{bmatrix}, \begin{bmatrix}0 & 0 \\0 & 1\end{bmatrix}\right\}
+        $$
+        $$
+        \boxed{\text{dim}(B_1) = 4}
+        $$
+        
+        A basis for polynomial.
+        $$
+        P_2(R)\\
+        B_2 = \{1, x, x^2\}\\
+        \text{dim }(B_2)=3
+        $$
+        
+        Let use compute matrix representation of A
+        $$
+        A = \left[ \left[A\left(\begin{bmatrix}1&0\\0&0\end{bmatrix}\right)\right]_{B_2}, \left[A\left(\begin{bmatrix}0&1\\0&0\end{bmatrix}\right)\right], \dots, \left[A\left(\begin{bmatrix}0&0\\0&1\end{bmatrix}\right)\right] \right]
+        $$
+        """)
+
+    if w2_sub == "Lecture 4 (AI structured and annotated)":
+        st.header("Lecture 4:")
+        st.subheader("Tuesday, October 7, 2025")
+        st.markdown(r"""
+        #### Linear Spaces
+        Let $(V, F)$ be *vector spaces*. To be a normed linear space, there $\exists$
+
+        **Map**
+        $$
+        ||\cdot|| : V \to \mathbb{R}^+
+        $$
+
+        > You could expand this by defining the three axioms of a norm: positivity, homogeneity, and triangle inequality. These ensure that the mapping behaves like a proper "length" function. 
 
         ---
 
-        ### 1. Null Space and Range Space of a Linear Map
+        ### Norms
 
-        For a matrix (or linear map) \(A: U \to V\),
+        #### 1) Triangle Inequality
+        $$
+        ||V_1 + V_1|| = ||V_1|| + ||V_1||
+        $$    
 
-        - **Null space (kernel):**
-        $$
-        N(A) = \{\,x \in U \mid A x = 0\,\}
-        $$
-        It is a **subspace** of the domain \(U\).
+        > This appears to be a typo; likely meant $||v_1 + v_2|| \le ||v_1|| + ||v_2||$. The triangle inequality defines one of the key properties of norms. 
 
-        - **Range space (image):**
+        #### Scalar Multiplication
         $$
-        R(A) = \{\,A x \mid x \in U\,\}
+        \forall \alpha \in F, \quad u \in V
         $$
-        It is a **subspace** of the codomain \(V\).
+
+        > This line seems to introduce the homogeneity property of norms: $||\alpha u|| = |\alpha|\,||u||$. 
+
+        #### Example
+        $$
+        ||v|| = \sum_{i=1}^n|\alpha_i|\\
+        ||x||_2 = \left(\sum_{i=1}^n |x_i|^2\right)^{\frac{1}{2}} = 2\text{-norm}\\
+        ||x||_p = \left(\sum_{i=1}^n |x_i|^p\right)^{1/p}\\
+        ||x||_\infty = \max |x_i| = \infty\text{-norm}
+        $$
+
+        > Here you could mention that these are all examples of $p$-norms. Note that $||x||_\infty = \lim_{p \to \infty} ||x||_p$. 
 
         ---
 
-        ### Example
+        ### Rank and Linear Independence
 
-        Let
+        #### Rank
+        The rank of a matrix is the dimension of its range space.
         $$
-        A =
+        \text{Rank}(A) := \dim(R(A))
+        $$
+
+        If a matrix is *full rank*:
+
+        #### 1) Full row rank $\implies$ all rows of $A$ are linearly independent.  
+        #### 2) Full column rank $\implies$ all columns are linearly independent.
+
+        > You could add commentary about rank-nullity theorem: $\dim(R(A)) + \dim(N(A)) = n$. 
+
+        ---
+
+        ### Sum of Vector Subspaces
+
+        Let $(V, F)$ be a vector space and $U$ and $W$ be subspaces of $V$.
+
+        Define the sum of vector subspaces:
+        $$
+        U + W = \left\{ u + w \;\middle|\; u \in U,\, w \in W \right\} \subseteq V
+        $$
+
+        These are all possible *sum combinations* of elements of $U$ and $W$.
+
+        $$
+        \implies N(A) = \text{span}\left(\begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix} \;\middle|\; A x = 0\right)
+        = \underbrace{\text{span}\left(\begin{bmatrix}1\\1\\1\\1\end{bmatrix}\right)}_{\text{coordinate representation in }B}
+        $$
+
+        **Check:** 
+        $$
+        A\begin{bmatrix}1&1\\1&1\end{bmatrix} = 0
+        $$
+
+        > Consider adding a brief explanation: The sum $U+W$ is the smallest subspace containing both $U$ and $W$. 
+
+        ---
+
+        ### Direct Sum
+
+        A space $V$ is a direct sum of $U$ and $W$, denoted $\boxed{V = U \oplus W}$, if $U \cap W = \{0\}$.
+
+        Thus, $V = U + W$ and $U \cap W = \{0\}$.
+
+        #### Example
+        $$
+        U = \text{span}\left\{\begin{bmatrix}1\\1\\0\end{bmatrix}, \begin{bmatrix}2\\0\\0\end{bmatrix}\right\}\\
+        W = \{(x, y, z) \;|\; x - 2y + z = 0\} = \left\{(x, y, z) = y\begin{bmatrix}2\\1\\0\end{bmatrix} + z\begin{bmatrix}-1\\0\\1\end{bmatrix}\right\}
+        $$
+
+        > This could use elaboration on how the $W$ basis is derived from solving the constraint $x - 2y + z = 0$. 
+
+        Simplify:
+        $$
+        \begin{align*}
+        W &= \left\{(x, y, z): \begin{bmatrix}x\\y\\z\end{bmatrix} = y\begin{bmatrix}2\\1\\0\end{bmatrix} + z\begin{bmatrix}-1\\0\\1\end{bmatrix}, \; y, z \in \mathbb{R} \right\}\\
+        &= \text{span}\left(\begin{bmatrix}2\\1\\0\end{bmatrix}, \begin{bmatrix}-1\\0\\1\end{bmatrix}\right)\\
+        &\implies U + W = \mathbb{R}^3
+        \end{align*}
+        $$
+
+        > Add a note that since $U$ and $W$ span $\mathbb{R}^3$ and have trivial intersection, $V = \mathbb{R}^3 = U \oplus W$. 
+
+        ---
+
+        ### Range and Null Space Relationship
+
+        The range of $A$ is the span of its column vectors.
+
+        **Example**
+        $$
+        \boxed{
+        R(A) = \text{span}\left\{
+        \begin{bmatrix}1\\0\\0\end{bmatrix},
+        \begin{bmatrix}-1\\1\\0\end{bmatrix},
+        \begin{bmatrix}0\\-1\\1\end{bmatrix}
+        \right\}
+        }
+        $$
+
+        > It might help to note that $R(A)$ is also called the column space of $A$, and its dimension is the rank. 
+
+        ---
+
+        ### Null Space Example
+
+        **Definition:**
+        $$
+        N(A) := \{x \;|\; A x = 0\}
+        $$
+
+        Apply to example:
+        $$
+        A = 
         \begin{bmatrix}
         1 & -1 & 0 & 0 \\
         0 & 1 & -1 & 0 \\
         0 & 0 & 1 & -1
-        \end{bmatrix} \in \mathbb{R}^{3\times4}
+        \end{bmatrix},
+        \quad
+        x = \begin{bmatrix}x_1\\x_2\\x_3\\x_4\end{bmatrix}
         $$
 
-        **Find \(N(A)\):**
-        Solve \(A x = 0\).
-
-        \[
+        Compute:
+        $$
+        A x = 0 \implies
         \begin{cases}
-        x_1 - x_2 = 0\\
-        x_2 - x_3 = 0\\
+        x_1 - x_2 = 0 \\
+        x_2 - x_3 = 0 \\
         x_3 - x_4 = 0
         \end{cases}
         \Rightarrow x_1 = x_2 = x_3 = x_4
-        \]
-        Hence,
-        $$
-        N(A) = \text{span}\!\left(
-        \begin{bmatrix}1\\1\\1\\1\end{bmatrix}
-        \right)
         $$
 
-        **Find \(R(A)\):**
-
-        The range (or column space) is the span of the columns of \(A\):
+        Thus:
         $$
-        R(A) = \text{span}\!\left(
-        \begin{bmatrix}1\\0\\0\end{bmatrix},
-        \begin{bmatrix}-1\\1\\0\end{bmatrix},
-        \begin{bmatrix}0\\-1\\1\end{bmatrix}
-        \right)
+        N(A) = \text{span}\left(\begin{bmatrix}1\\1\\1\\1\end{bmatrix}\right)
         $$
 
-        Therefore,
-        $$
-        \dim N(A) = 1, \quad \dim R(A) = 3
-        $$
+        > You could note that this means $\dim(N(A)) = 1$ and $\dim(R(A)) = 3$, satisfying the rank-nullity theorem for $A \in \mathbb{R}^{3\times4}$. 
 
         ---
 
-        ### 2. Rank–Nullity Theorem
+        ### Basis Representations and Coordinate Transformations
 
-        Let \(A: U \to V\) be linear.
+        We can compute transformations of any matrix by writing it in coordinate form with respect to a basis $B$.
 
-        \[
-        \boxed{\dim(U) = \dim(N(A)) + \dim(R(A))}
-        \]
+        $$
+        C = \begin{bmatrix}1 & 2\\0 & 1\end{bmatrix}
+        = 1 \cdot \begin{bmatrix}1 & 0 \\0 & 0\end{bmatrix}
+        + 2\begin{bmatrix}0 & 1 \\0 & 0\end{bmatrix}
+        + 0\begin{bmatrix}0 & 0 \\1 & 0\end{bmatrix}
+        + 1 \begin{bmatrix}0 & 0 \\0 & 1\end{bmatrix}
+        $$
 
-        - \(\dim(N(A))\) is called the **nullity** of \(A\).
-        - \(\dim(R(A))\) is the **rank** of \(A\).
+        Coefficient with $B_1$
+        $$
+        A(C) = [A \cdot C] = 
+        \begin{bmatrix}1&-1&0&0\\0&1&-1&0\\0&0&1&-1\end{bmatrix}
+        \begin{bmatrix}1\\2\\0\\1\end{bmatrix}
+        = \begin{bmatrix}-1\\2\\-1\end{bmatrix}
+        $$
 
-        Example above:  
-        \(\dim(U)=4, \dim(N(A))=1, \dim(R(A))=3 \Rightarrow 4=1+3.\)
+        $$
+        \boxed{1 - 2x - x^2}
+        $$
+
+        > Here, it would be helpful to describe what transformation $A$ represents (e.g., discrete differentiation on polynomial coefficients). 
 
         ---
 
-        ### 3. Sum and Direct Sum of Subspaces
+        ### Polynomial Basis Examples
 
-        Let \(U, W\) be subspaces of a vector space \(V\).
-
-        - The **sum** of \(U\) and \(W\) is:
         $$
-        U + W = \{\,u + w \mid u \in U,\, w \in W\,\}
+        A\begin{bmatrix}1&0\\0&0\end{bmatrix} \rightarrow \text{maps to constant } 1
         $$
 
-        - \(V\) is the **direct sum** of \(U\) and \(W\), denoted
         $$
-        V = U \oplus W,
-        $$
-        if every \(v \in V\) can be written **uniquely** as \(v = u + w\),  
-        and \(U \cap W = \{0\}\).
-
-        Thus, for linear maps:
-        $$
-        U = N(A), \quad W = R(A), \quad \text{and } U \cap W = \{0\}
+        \boxed{
+        \left[[1]_{B_1}, [-1+x]_{B_2}, [-x+x^2]_{B_3}, [-x^2]_{B_4}\right]
+        }
         $$
 
-        ---
-
-        ### 4. Rank
-
-        The **rank** of a matrix \(A\) is:
         $$
-        \text{rank}(A) = \dim(R(A))
+        \left[\underbrace{\begin{bmatrix}1\\0\\0\end{bmatrix}}_{\text{coefficient vector of }B_1}, \dots\right]
         $$
 
-        Equivalently, the number of **linearly independent columns** of \(A\).
-
-        ---
-
-        ### 5. Normed Vector Spaces
-
-        Let \((V, F)\) be a vector space.  
-        A **norm** on \(V\) is a function
         $$
-        \|\cdot\| : V \to \mathbb{R}
-        $$
-        that satisfies, for all \(u, v \in V\) and scalar \(\alpha \in F\):
-
-        1. **Positive Definiteness:** \(\|v\| \ge 0,\) and \(\|v\| = 0 \iff v = 0\)
-        2. **Homogeneity:** \(\|\alpha v\| = |\alpha|\,\|v\|\)
-        3. **Triangle Inequality:** \(\|u + v\| \le \|u\| + \|v\|\)
-
-        ---
-
-        ### Common Examples of Norms on \(\mathbb{R}^n\)
-
-        1. **1-norm (Manhattan norm):**
-        $$
-        \|x\|_1 = \sum_{i=1}^{n} |x_i|
+        \begin{bmatrix}
+        1&-1&0&0\\
+        0&1&-1&0\\
+        0&0&1&-1
+        \end{bmatrix} \in \mathbb{R}^{3\times4}
         $$
 
-        2. **2-norm (Euclidean norm):**
+        This is *a diagonal-like difference operator.*
+
+        #### Consider:
         $$
-        \|x\|_2 = \sqrt{\sum_{i=1}^{n} |x_i|^2}
+        B_1 = \left\{
+        \begin{bmatrix}1 & 0 \\0 & 0\end{bmatrix},
+        \begin{bmatrix}0 & 1 \\0 & 0\end{bmatrix},
+        \begin{bmatrix}0 & 0 \\1 & 0\end{bmatrix},
+        \begin{bmatrix}0 & 0 \\0 & 1\end{bmatrix}
+        \right\}
+        $$
+        $$
+        \boxed{\dim(B_1) = 4}
         $$
 
-        3. **∞-norm (Maximum norm):**
+        A basis for polynomials:
         $$
-        \|x\|_\infty = \max_i |x_i|
+        P_2(\mathbb{R}), \quad
+        B_2 = \{1, x, x^2\}, \quad
+        \dim(B_2) = 3
         $$
 
-        Each satisfies the three norm axioms.
+        Let us compute the matrix representation of $A$:
+        $$
+        A = \left[
+        \left[A\left(\begin{bmatrix}1&0\\0&0\end{bmatrix}\right)\right]_{B_2},
+        \left[A\left(\begin{bmatrix}0&1\\0&0\end{bmatrix}\right)\right],
+        \dots,
+        \left[A\left(\begin{bmatrix}0&0\\0&1\end{bmatrix}\right)\right]
+        \right]
+        $$
 
-        ---
-
-        ### Key Takeaways
-        - \(R(A)\) = column space = span of columns of \(A\)
-        - \(N(A)\) = solution space of \(A x = 0\)
-        - \(\dim(U) = \text{rank}(A) + \text{nullity}(A)\)
-        - \(V = N(A) \oplus R(A)\) is a **direct sum**
-        - Norms give us a way to measure **lengths and magnitudes** in vector spaces
+        > This could be expanded to explain how $A$ acts as a linear transformation between basis spaces $B_1$ and $B_2$. 
         """)
 
     if w2_sub == "Lecture 5":
         st.header("Lecture 5: Normed and Inner Product Spaces")
         st.subheader("Thursday, October 9, 2025")
-
         st.markdown(r"""
-        ### Announcements
-        - No posting of notes going forward (sad 😢)
-        - Homework 1 will be posted this week!
-
+        $(V, F)$ is a normed linear space if the units are:
+        $$
+        ||\cdot|| : V \rightarrow R^+
+        $$ 
+        
+        and satisfies:
+        #### 1) $||v_1 + v_2|| \leq ||v_1|| + ||v_2||$
+        
+        #### 2) $||\alpha V|| = |\alpha|||v||, \quad \alpha \in R, C$
+        
+        #### 3) $||v|| = 0 \iff v = 0_v$
+        
         ---
-
-        ### Definition: Normed Linear Space
-        Let $(V, F)$ be a vector space over the field $F$.
-
-        $(V, F)$ is a **normed linear space** if there exists a mapping
-        $$
-        \|\cdot\| : V \to \mathbb{R}^+
-        $$
-        that satisfies the following properties for all $v_1, v_2 \in V$ and $\alpha \in F$:
-
-        1. **Triangle Inequality:**
-        $$
-        \|v_1 + v_2\| \le \|v_1\| + \|v_2\|
-        $$
-        2. **Homogeneity:**
-        $$
-        \|\alpha v\| = |\alpha|\,\|v\|, \quad \alpha \in \mathbb{R}, \mathbb{C}
-        $$
-        3. **Positive Definiteness:**
-        $$
-        \|v\| = 0 \iff v = 0_V
-        $$
-
+        ### Example 1) Vector spaces of matrices, $A\in F^{n\times n}, F \in R, C$
+        $a)$ $|A|_1 = \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|$
+        
+        $b) |A|_F = (\sum_{i=1}^n \sum_{j=1}^n |a_{ij}|^2)^{1/2}$
+        
+        $c) |A|_b = \text{max}_{ij} \{|a_{ij}|\}$
+        > Note: induced norm will be discussed later
+        
         ---
-
-        ### Example 1: Vector Spaces of Matrices
-        Let $A \in F^{n\times n}$, where $F \in \{\mathbb{R}, \mathbb{C}\}$.
-
-        Different matrix norms include:
-
-        a) **1-Norm:**
+        ### Example 2) Vector spaces of functions
+        Let $(V, F)$ be a linear vector space. let $D$ be a set. 
+        
+        Let $M: D\to V$ be a class of functions. On $M$, we define addition and scalar multiplication as:
         $$
-        \|A\|_1 = \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|
+        (f+g)(d) = f(d) + g(d), \quad \forall f, g \in M, \forall d \in D\\
+        (\alpha f)(d) = \alpha \cdot f(d), \quad \forall f \in M, \forall \alpha \in F, \forall d \in D
         $$
-
-        b) **Frobenius Norm:**
-        $$
-        \|A\|_F = \left( \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}
-        $$
-
-        c) **Infinity Norm:**
-        $$
-        \|A\|_\infty = \max_{i,j} |a_{ij}|
-        $$
-
-        > **Note:** Induced norms will be discussed later.
-
+        
         ---
-
-        ### Example 2: Vector Spaces of Functions
-        Let $(V, F)$ be a linear vector space, and let $D$ be a set.  
-        Let $M : D \to V$ be a class of functions.  
-
-        Define:
+        ### Example 3) Continuous functions in $[t_0, t_1] \to R^n$ denoed as:
         $$
-        (f+g)(d) = f(d) + g(d), \quad (\alpha f)(d) = \alpha f(d)
+        C\left([t_0, t], R^n\right)
         $$
-        for all $f,g \in M$, $\alpha \in F$, and $d \in D$.
-
-        Then $M$, with these operations, is a linear space over $F$.
-
+        
+        ### Example 4) norms on vector spaces of functions
+        $a) \,  ||f||_1 = \int_{t_0}^t ||f(t)||dt \rightarrow L1 \text{ norm }, \quad \text{where } ||\cdot|| \text{{ is any norm}}$
+        
+        $b) \, ||f||_2 = \left(\int_{t_0}^t ||f(t)||^2 dt \right)^{1/2} \rightarrow L2 \text{ norm}$ 
+        
+        $c) \, ||f||_\infty = \text{max}_{t\in [t_0, t_1]}\{||f(t)||\} \rightarrow L\infty \text{ norm}$
+        
         ---
-
-        ### Example 3: Continuous Functions
-        Continuous functions in $[t_0, t_1] \to \mathbb{R}^n$ are denoted as:
+        ### Equivalence of norms: Two norms $||\cdot||_a$ and $||\cdot||_b$ are equivalent if 
+        
         $$
-        C([t_0, t_1], \mathbb{R}^n)
+        \exists\, \alpha, \beta \in \mathbb{R}^+ \text{ such that } 
+        \forall v \in V,\; 
+        \alpha\, ||v||_a \leq ||v|| \leq \beta\, ||v||_b
         $$
-
+        
         ---
-
-        ### Example 4: Norms on Vector Spaces of Functions
-        a) $L_1$-norm:
+        ### Example 5) Consider the vector space $(F^n, F)$. Then
+        
+        #### 1) $||x||_\infty \leq ||x||_1 \leq n||x||_\infty$
+        Proof: Definition of the 1-norm
+        
         $$
-        \|f\|_1 = \int_{t_0}^{t_1} \|f(t)\|\,dt
+        ||x||_1 = \sum_{i=1}^n |x_i| = \underbrace{\text{max}_{i = 1, \dots, n}\{|x_i|\}}_{||x_\infty||} + \sum_{i = 1, \dots, n; 1 \neq \text{ max}}|x_i|\\
+            \downarrow \\
+        ||x||_\infty \leq ||x||_\infty + \sum_{i = 1, \dots, n; i \neq \text{ max}}|x_i| \leq n \cdot ||x||_\infty
         $$
-
-        b) $L_2$-norm:
-        $$
-        \|f\|_2 = \left( \int_{t_0}^{t_1} \|f(t)\|^2\,dt \right)^{1/2}
-        $$
-
-        c) $L_\infty$-norm:
-        $$
-        \|f\|_\infty = \max_{t \in [t_0, t_1]} \|f(t)\|
-        $$
-
+        
         ---
-
-        ### Equivalence of Norms
-        Two norms $\|\cdot\|_a$ and $\|\cdot\|_b$ are **equivalent** if  
-        $\exists \alpha, \beta \in \mathbb{R}^+$ such that  
+        #### 2) $||x||_\infty \leq ||x||_2 \leq \sqrt{n}||x||_\infty$
         $$
-        \forall v \in V : \alpha \|v\|_a \le \|v\|_b \le \beta \|v\|_a
+        \begin{align*}
+        ||x||_2 = \left(||x||_\infty^2 + \sum_{i = 1; i \neq \text{ max}}|x_i|^2\right)^{1/2} &\leq \left(||x||_\infty^2 + \sum_{i=1; i \neq \text{ max}}(\text{max}_{j=1\dots n}\{|x_j|\}^2)\right)^{1/2}\\
+        &= \left(||x||_\infty^2 + (n-1)(\text{max}_{j=1\dots n}\{|x_j|\}^2)\right)^{1/2}\\
+        &= (n \cdot ||x||_\infty^2)^{1/2}\\
+        &= \sqrt{n} \cdot ||x||_\infty
+        \end{align*}
         $$
-
+        
+        So, $\boxed{||x||_2 \leq \sqrt{n} \cdot ||x||_\infty}$
+        
         ---
-
-        ### Example 5: Equivalence of Vector Norms in $(F^n, F)$
-        1. $\|x\|_\infty \le \|x\|_1 \le n \|x\|_\infty$
-        2. $\|x\|_\infty \le \|x\|_2 \le \sqrt{n}\|x\|_\infty$
-        3. $\dfrac{1}{\sqrt{n}}\|x\|_1 \le \|x\|_2 \le \|x\|_1$
-
-        > Proof for (2) and (3) left as an exercise.
-
+        #### 3) $\frac{1}{\sqrt{n}}||x||_1 \leq ||x||_2 \leq ||x||_2$
+        $$
+        \frac{1}{\sqrt{n}}||x||_1 \leq ||x_2|| \leq ||x||_1
+        $$        
+        
+        **By definition:** $||x||_1 = \sum_{i=1}^n|x_i| \quad ||x||_2 = \left(\sum_{i=1}^n|x_i|^2\right)^{1/2}$
+        $$
+        ||x||_2 = \left(\sum_{i=1}^n |x_i|^2\right)^{1/2} \leq \left(\left(\sum_{i=1}^n|x_i|\right)^2 \right)^{1/2} \rightarrow \text{ Triangle Equality}\\
+        = \sum_{i=1}^n|x_i|=||x||_1
+        $$
+        
+        Thus: $\boxed{||x||_2 \leq ||x||_1}$
+        
+        $$
+        ||x||_1 = \sum_{i=1}^n|x_i| \iff ||x||_1^2 = \left(\sum_{i=1}^n|x_i|\right)^2
+        $$
+        $$
+        \frac{1}{n} ||x||_1^2 = \frac{1}{n}\left(\sum_{i=1}^n|x_i|\right)^2 \geq \frac{1}{n}\left(\sum_{i=1}^n|x_i|^2\right)
+        $$
+        
         ---
-
-        ### Proof of (1)
-        $\|x\|_\infty \le \|x\|_1 \le n \|x\|_\infty$
-
-        By definition:
-        $$
-        \|x\|_1 = \sum_{i=1}^n |x_i|, \quad
-        \|x\|_2 = \left( \sum_{i=1}^n |x_i|^2 \right)^{1/2}
-        $$
-
-        Then:
-        $$
-        \|x\|_2 = \left( \sum_{i=1}^n |x_i|^2 \right)^{1/2}
-        \le \left( \left( \sum_{i=1}^n |x_i| \right)^2 \right)^{1/2}
-        = \sum_{i=1}^n |x_i| = \|x\|_1
-        $$
-
-        Thus:
-        $$
-        \boxed{\|x\|_2 \le \|x\|_1}
-        $$
-
-        and
-        $$
-        \frac{1}{n}\|x\|_1^2 = \frac{1}{n}\left( \sum_{i=1}^n |x_i| \right)^2 \ge \frac{1}{n}\sum_{i=1}^n |x_i|^2
-        $$
-
-        Hence:
-        $$
-        \frac{1}{\sqrt{n}}\|x\|_1 \le \|x\|_2
-        $$
-
-        ---
-
-        ### Relation Between $\|x\|_2$ and $\|x\|_\infty$
-        $$
-        \|x\|_2 = \left( \|x\|_\infty^2 + \sum_{i \ne \text{max}} |x_i|^2 \right)^{1/2}
-        \le \left( \|x\|_\infty^2 + (n-1)\|x\|_\infty^2 \right)^{1/2}
-        = \sqrt{n}\|x\|_\infty
-        $$
-
-        Thus:
-        $$
-        \boxed{\|x\|_2 \le \sqrt{n}\|x\|_\infty}
-        $$
-
-        ---
-
         ### Hilbert Spaces
-        Let $F = \mathbb{R}$ or $\mathbb{C}$ and consider the linear space $(H, F)$.
-
-        A function $\langle \cdot, \cdot \rangle : H \times H \to F$ is called an **inner product** if and only if:
-
-        a) $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$  
-        b) $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$  
-        c) $\langle x, x \rangle > 0 \iff x \ne 0$  
-        d) $\langle x, y \rangle = \overline{\langle y, x \rangle}$ (complex conjugate symmetry)
-
-        A vector space equipped with an inner product is called a **Hilbert Space**.
+        Let $F = R$ or $F = C$ and consider the linear space $(H, F)$. The function $<\cdot, \cdot>: H \times H \to F$ is called an inner product if and only if:
+        
+        $a) \, <x, y+z> = <x, y> + <x, z>, \quad \forall x, y, z \in H$
+        
+        $b) \, <x, \alpha y> = \alpha <x, y>, \quad \forall x, y \in H, \forall \alpha \in F$
+        
+        $c) \, <x, x, > > 0 \iff x\neq 0$
+        
+        $d) \, <x, y> = <y, x> \implies \text{ complex conjugate}$
+        
+        A vector space equipped with an inner product is called a Hilbert space
+        
+        ---
+        ### Example 6) $(F^2, F, <\cdot, \cdot>)$, with $F = R$ or $F = C$ is a Hilbert space under the inner product:
+        $$
+        <x, y> := \sum_{i=1}^n y_i \bar{x_i} = x^H u
+        $$
+        
+        > $H$ is Hermitian transpose or $\dagger$
 
         ---
-
-        ### Example 6
-        Let $(F^n, F, \langle \cdot, \cdot \rangle)$ with $F = \mathbb{R}$ or $\mathbb{C}$ be a Hilbert Space under the inner product:
+        ### Orthogonality: COnsider the Hilbert Space $(H, F, <\cdot, \cdot>)$. Two vectors are orthogonal if and only if
         $$
-        \langle x, y \rangle := \sum_{i=1}^n y_i \overline{x_i} = x^H y
+        <x, y> = 0
         $$
-        > (Here $x^H$ denotes the Hermitian transpose.)
-
+        
         ---
-
-        ### Orthogonality
-        In a Hilbert Space $(H, F, \langle \cdot, \cdot \rangle)$, two vectors are **orthogonal** if and only if:
+        ### Example 7) Consider $R^2$
+        - $v_1 = \begin{bmatrix}1\\0\end{bmatrix}$ and $v_2 = \begin{bmatrix} 0 \\ 1\end{bmatrix}$ are orthogonal
         $$
-        \langle x, y \rangle = 0
+        <v_1, v_2> = v_1^T v_2 = 0
         $$
-
-        #### Example 7
-        Consider $\mathbb{R}^2$:
+        - $w_1 = \begin{bmatrix}-1\\1\end{bmatrix}$ and $w_2 = \begin{bmatrix}-1\\1\end{bmatrix}$
         $$
-        v_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \quad
-        v_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+        <w_1, w_2> = w_1^Tw_2 = 0 \rightarrow w_1 \perp w_2
         $$
-        Then $\langle v_1, v_2 \rangle = v_1^T v_2 = 0$ ⇒ $v_1 \perp v_2$
-
-        Similarly:
-        $$
-        w_1 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}, \quad
-        w_2 = \begin{bmatrix} -1 \\ -1 \end{bmatrix}
-        $$
-        Then $\langle w_1, w_2 \rangle = 0$ ⇒ $w_1 \perp w_2$
-
+        
         ---
-
-        ### Orthogonal Complement of a Subspace
-        Let $M \subseteq H$.  
-        The **orthogonal complement** of $M$ is defined as:
-        $$
-        M^\perp := \{ y \in H : \langle x, y \rangle = 0, \forall x \in M \}
-        $$
-
+        ### Orthogonal Complement of a Subspace:
+        Let $M \subseteq H$; the subset $M^\perp := \{y\in H: <x, y> = 0, \forall x\in M\}$
+        
         ---
-
-        ### Fundamental Theorem of Linear Algebra
-        Let $A: \mathbb{R}^n \to \mathbb{R}^m$. Then:
-
-        (i) $\mathcal{N}(A)^\perp = \mathcal{R}(A^T)$  
-        (ii) $\mathcal{R}(A)^\perp = \mathcal{N}(A^T)$
-
-        **Proof of (i):**
-
-        We note that showing (i) is equivalent to showing  
+        ### Example 8) Let $M = \text{span}\{v_1, v_2\}, v_1 = \begin{bmatrix}-1\\1\\0\end{bmatrix}, v_2 = \begin{bmatrix}0\\0\\1\end{bmatrix}.$ Find $M^{\perp}$
+        
+        > Note: $M\subset R^3$, and $dim(M) = 2$
+        
+        **Proof:** From the definition of $M^\perp$, we get
         $$
-        \mathcal{N}(A) = \mathcal{R}(A^T)^\perp
+        \begin{align*}
+        M^\perp &= \{w: v_1^T w = 0 \text{ and } v_2^Tw = 0, w\in R^3\}\\
+        &= \left\{w: \begin{bmatrix}v_1^Tw \\v_2^Tw\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}, w \in R^3 \right\}\\
+        &= \left\{w: \begin{bmatrix}v_1^T \\v_2^T\end{bmatrix}w = \begin{bmatrix}0\\0\end{bmatrix}, w \in R^3 \right\} = N\left(\begin{bmatrix}v_1^T\\v_2^T\end{bmatrix}\right)
+        \end{align*}
         $$
-
-        Let $x \in \mathbb{R}^n$, $x \in \mathcal{N}(A)$:
+        Now find the null space of the matrix:
         $$
-        Ax = 0 \implies y^T A x = 0, \ \forall y \in \mathbb{R}^m
+        \begin{bmatrix} v_1^T \\v_2^T\end{bmatrix} = \begin{bmatrix}-1&1&0\\0&0&1\end{bmatrix} \implies \begin{bmatrix}-1&1&0\\0&0&1\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix} = \begin{bmatrix}0\\0\end{bmatrix}\\
+        \implies x_1 = x_2, x_3 = 0 \implies w = \begin{bmatrix}1\\1\\0\end{bmatrix}
         $$
-        $$
-        (A^T y)^T x = 0, \ \forall y \in \mathbb{R}^m
-        $$
-        ⇒ $x \perp A^T y$, i.e. $x \perp \mathcal{R}(A^T)$  
-        ⇒ $\mathcal{N}(A) \subseteq \mathcal{R}(A^T)^\perp$
-
-        Conversely, let $x \in \mathcal{R}(A^T)^\perp$:
-        $$
-        (A^T y)^T x = 0 \ \forall y \in \mathbb{R}^m
-        \implies y^T (A x) = 0 \ \forall y \in \mathbb{R}^m
-        \implies A x = 0
-        $$
-        Thus, $x \in \mathcal{N}(A)$ ⇒ $\mathcal{R}(A^T)^\perp \subseteq \mathcal{N}(A)$  
-        Hence:
-        $$
-        \boxed{\mathcal{N}(A) = \mathcal{R}(A^T)^\perp}
-        $$
-
+        Thus: $M^\perp = \text{span}\left\{\begin{bmatrix}1\\1\\0\end{bmatrix}\right\} \rightarrow R^3 = \text{span}\left\{\begin{bmatrix}-1\\1\\0\end{bmatrix}, \begin{bmatrix}0\\0\\1\end{bmatrix}\right\} \oplus \text{span}\left\{\begin{bmatrix}1\\1\\0\end{bmatrix}\right\}$
+        
         ---
-
-        ### Example 8
-        Let $M = \text{span}\{v_1, v_2\}$ with
+        ### Fundamental Theorem of Linear Algebra:
+        
+        #### Theorem: Let $A:$R^n \to R^m$, then:
+        
+        $(i) \, N(A)^\perp = R(A^T)$
+        
+        $(ii) \, R(A)^\perp = N(A^T)$
+        
+        both "$=$" is $\subseteq$ AND $\supseteq$
+        
+        #### Proof of $(i)$: We note that showing $(i)$ is equivalent to showing 
         $$
-        v_1 = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, \quad
-        v_2 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+        N(A) = R(A^T)^\perp
         $$
-        Find $M^\perp$.
-
-        Since $M \subset \mathbb{R}^3$ and $\dim(M) = 2$,  
-        by definition:
+        
+        #### "$\subseteq$": Let $x \in R^n, x\in N(A)$.
+        
+        Then $iff Ax = 0 \implies \underbrace{y^T A}_{(A^Ty)^T}x = y^T 0 = , \forall y \in R^m$
         $$
-        M^\perp = \{ w : v_1^T w = 0, \ v_2^T w = 0, \ w \in \mathbb{R}^3 \}
+        \implies x \perp (A^Ty)\\
+        \implies x \perp R(A^T)\\
+        \implies \text{some } x \in N(A), \text{ we have } N(A) \subseteq R(A^T)^\perp
         $$
-
-        Compute:
+        
+        #### "$\supseteq$": Let $x \in R(A^T)^\perp$
         $$
-        \begin{bmatrix} v_1^T \\ v_2^T \end{bmatrix}
-        = \begin{bmatrix} -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
-        $$
-
-        The null space of this matrix gives:
-        $$
-        x_1 = x_2, \ x_3 = 0 \implies w = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}
-        $$
-
-        Thus:
-        $$
-        M^\perp = \text{span}\left\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \right\}
-        $$
-
-        ---
-
-        ### Summary of Relationships
-        $$
-        \mathbb{R}^3 = \text{span}\left\{
-        \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix},
-        \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix},
-        \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}
-        \right\}
+        \begin{align*}
+        \text{Then } x \in R(A^T)^\perp &\iff (A^Ty)^Tx = 0, \forall y \in R^m\\
+        &\iff y^T(Ax) = 0, \forall y \in R^m\\
+        &\implies Ax = 0 \iff x \in N(A)
+        &\iff R(A^T)^\perp \subseteq N(A)\\
+        &\implies N(A)^\perp = R(A^T)
+        \end{align*}
         $$
         """)
 
@@ -1383,6 +1576,7 @@ if section  == "Week 4":
     \dot{x}(t) = f(x(t) = f(x))
     $$
     
+    ---
     ### Bellman-Gromwell Lemma (Integral Form)
     Let $u(\cdot) > 0, k(\cdot) > 0$ real-valued  pointwise continuous on $R_t$ and assume $c_1 \geq 0$, and $t_0 \in R_t$
     
@@ -1424,6 +1618,7 @@ if section  == "Week 4":
         =U'(t)\text{exp}\left(-\int_{t_0}^t k(\tau)d\tau \right) + U(t)\text{exp}(k(t))\left(-\int_{t_0}^t k(\tau)d\tau \right) \leq 0
     $$
     
+    ---
     #### Uniqueness of Solutions
     Consider
     $$
@@ -1459,6 +1654,7 @@ if section  == "Week 4":
     \implies \phi(t) = \psi(t)
     $$
     
+    ---
     #### Dynamical Systems (Callier + Desson, Ch. 5)
     
     We denote a dynamical system formally as 
@@ -1518,6 +1714,152 @@ if section  == "Week 4":
     
     st.divider()
     st.header("Lecture 9")
+    st.subheader("Thursday, October 23, 2025")
+    st.markdown(r"""
+    ### Time-Invariant OS    
+    Define the shift operator
+    $$
+    (T_\tau u)(t) = u(t-\tau)
+    $$     
+    
+    #### Time invariance
+    #### 1) U is closed under shifts $T_\tau$
+    (If $u(\cdot) \in U \implies (T_\tau u)(\cdot) \in U$)
+    
+    #### 2) $\phi(t_1, t_0, x_0, u) = \phi(t_1 + \tau, t_0 + \tau, x_0, T_\tau u)$
+    
+    $$
+    \forall t_0, t_1 \geq 0\\
+    \forall \text{ shifts } \tau\\
+    \forall x_0 \in \Sigma\\
+    \forall u \in U
+    $$
+    
+    ---
+    #### Linear time-varying systems (Callier + Desoer Ch. 2)
+    $$
+    R = [A(t), B(t), C(t), D(t)]
+    $$
+    Stands for 
+    $$
+    \begin{cases}
+    x(t_0) = x_0\\
+    \dot{x}(t) = A(t)x(t) + B(t)u(t)\\
+    y(t) = C(t)\lambda(t) + D(t) u(t)
+    \end{cases}
+    $$
+    where $\underbrace{x(t) \in R^n}_{\Sigma}, \underbrace{y(t) \in R^{n_0}}_Y, \underbrace{u(t) \in R^{n_i}}_U$
+    
+    The state transition function is the solution to the system
+    
+    ---
+    ### Existence and Uniqueness of Linear Time Varying Solutions
+    Let $A(t), B(t), C(t), D(t)$ be matrix valued piecewise continuous functions and let $u(t) \in U$ be a continuous function from $R_+ \to R^{n_i}$.
+    
+    Then
+    $$
+    f(x, t) = A(t)x(t) + B(t) u(t) = \dot{x}(t)
+    $$
+    is a piecewise function in time.
+    
+    Is $f(\cdot, t)$ Lipschitz continuous in $x$?
+    
+    $$
+    ||f(x, t) - f(y, t)|| = ||A(t)x + B(t)u - A(t)y - B(t)u||\\
+    = ||A(t)(x-y)|| = ||A(t)|| \cdot ||x-y||, \quad \forall x, y \in \Sigma
+    $$
+    
+    $k(t)$ is a Lipschitz function since $1) > 0$ and $2)$ is piecewise
+    
+    $\implies f(\cdot, t)$ is globally Lipschitz in x
+    $\implies$ By the fundamental lemma of Differential Equations, $\exists$ a unique solution to Linear time-varying systems
+    
+    The solution to Linear time-varying systems can be represented by the state transition map
+    $$
+    x(t) = s(t, t_0, x_0, u(\cdot))
+    $$
+    and there is a corresponding response map
+    $$
+    y(t) = \phi(t, t_0, x_0, u(\cdot))
+    $$
+    
+    #### How about linearity?
+    $\implies$ check superposition principle from lecture 8
+    
+    ---
+    ### State transition matrix/function
+    
+    Vector Differential Equation
+    $$
+    \dot{x}(t) = A(t)x(t) + B(t) u(t)\\
+    \dot{X}(t) = A(t)X(t), \quad X(0) = X_0
+    $$
+    
+    Define $\underbrace{\Phi(t_1, t_0)}_{\text{state transition function}}$ as the solutions to MDE with $\Phi(t_0, t_0) = I$
+    
+    #### Properties
+    #### 1) The solution to VDE is given by
+    $$
+    x(t) = \boxed{\Phi(t, t_0)}x_0
+    $$
+    
+    #### 2) $\Phi(t, t_0) = \Phi(t, t_0)\Phi(t_0, t_0), \quad \forall t, t_0 \in R$
+    
+    #### 3) $\Phi(t, t_0)^{-1} = \Phi(t_0, t)$
+    
+    #### Proof of (1):
+    $$
+    \underbrace{x(t)}_{\text{LHS}} = \underbrace{\Phi(t, t_0)x_0}_{\text{RHS}}
+    $$
+    
+    Strategy prove that both the LHS and RHS satisfy VDE with same IC $\implies$ they must be the same function because of uniqueness of solution to Linear Time Varying systems
+    """)
+    l9col1, l9col2 = st.columns(2)
+    with l9col1:
+        st.markdown(r"""
+        $$
+        \text{LHS}\\
+        x(t_0) = x_0\\
+        \dot{x}(t) = A(t)x(t) + B(t)u(t)
+        $$         
+        by definition
+        
+        $$
+        \begin{align*}
+        \text{LHS}(t_1) = \Phi(t_1, t_0) \\
+        \dot{\text{LHS}}(t) = \dot{\Phi}(t, t_0) \\
+        = A(t) \Phi(t, t_0)
+        \end{align*}
+        $$
+        """)
+        
+    with l9col2:
+        st.markdown(r"""
+        $$
+        \text{RHS}\\
+        \begin{align*}
+        \Phi(t_0, t_0)x_0 = Ix_0 = x_0 \\
+        \frac{d}{dt}\underbrace{[\Phi(t, t_0)x_0]}_{MDE} = \dot{\Phi}(t, t_0)x_0\\
+        = A(t) \Phi(t, t_0)x_0\\
+        = A(t)\underbrace{(\Phi(t, t_0)x_0)}_{VDE} 
+        \end{align*}
+        $$
+        $\implies$ solution to VDE
+        
+        $$
+        \begin{align*}
+        \text{RHS}(t_1) &= \Phi(t_1, t_1)\Phi(t_1, t_0) = \Phi(t_1, t_0) \\
+        \dot{\text{RHS}}(t) &= \frac{d}{dt}\big[\Phi(t, t_1)\underbrace{\Phi(t_1, t_0)}_{\text{constant}}\big] \\
+        &= \dot{\Phi}(t, t_1) \cdot \Phi(t_1, t_0) \\
+        &= A(t)\left(\Phi(t_1, t_1) \cdot \Phi(t_1, t_0)\right)
+        \end{align*}
+        $$
+        $\implies$ also a solution!
+        """)
+        
+    st.markdown(r"""
+    $\implies$ LHS and RHS satisfy the same Differential Equation and match at an arbitrary point $\implies \square$         
+    """)
     
 if section == "Week 5":
     st.title("Week 5")
