@@ -9,7 +9,8 @@ section = st.selectbox(
         "Week 1",
         "Week 2",
         "Week 3",
-        "Week 4"
+        "Week 4",
+        "Week 5"
     ],
 )
 
@@ -342,7 +343,274 @@ if section == "Week 1":
         ### Topics
         - Bases
         - Coordinate Representation
-        - Linear Maps         
+        - Linear Maps
+        
+        ### Proposition: Uniqueness of Coordinates
+        Let $\{b_1, b_2, \dots, b_n\}$ be a **basis** for a vector space $V$.
+        Then **every** vector $x \in V$ can be written uniquely as:
+        $$
+        x = \alpha_1 b_1 + \alpha_2 b_2 + \dots + \alpha_n b_n
+        $$
+        where the scalars $\alpha_i$ are called the **coordinates** of $x$ in this basis.
+
+        **Proof (by contradiction):**
+
+        Suppose there exist two different coordinate representations for $x$:
+        $$
+        x = \alpha_1 b_1 + \alpha_2 b_2 + \dots + \alpha_n b_n \\
+        x = \alpha_1' b_1 + \alpha_2' b_2 + \dots + \alpha_n' b_n
+        $$
+
+        Subtracting the two equations gives:
+        $$
+        0 = (\alpha_1' - \alpha_1)b_1 + (\alpha_2' - \alpha_2)b_2 + \dots + (\alpha_n' - \alpha_n)b_n
+        $$
+
+        Since $\{b_1, \dots, b_n\}$ are **linearly independent**, it must be that
+        $$
+        \alpha_1' - \alpha_1 = \alpha_2' - \alpha_2 = \dots = \alpha_n' - \alpha_n = 0
+        $$
+
+        Hence,
+        $$
+        \boxed{
+        \alpha_1' = \alpha_1, \quad \alpha_2' = \alpha_2, \quad \dots, \quad \alpha_n' = \alpha_n
+        }
+        $$
+        proving the coordinates are unique.
+        
+        ### Linear Maps
+        Let $(V, F)$ and $(W, F)$ be vector spaces over the same field $F$.
+        A function
+        $$
+        A: V \to W
+        $$
+        is called a **linear map** (or **linear transformation**) if and only if
+        it satisfies the **superposition principle**:
+        $$
+        A(\alpha_1 v_1 + \alpha_2 v_2) = \alpha_1 A(v_1) + \alpha_2 A(v_2),
+        \quad \forall v_1, v_2 \in V, \; \forall \alpha_1, \alpha_2 \in F
+        $$
+
+        ---
+
+        ### Example
+        Define a map:
+        $$
+        A: P_2(\mathbb{R}) \to P_2(\mathbb{R}) \\
+        A(a s^2 + b s + c) = c s^2 + b s + a
+        $$
+
+        **Is $A$ linear?**
+
+        Let
+        $$
+        v_1 = a_1 s^2 + b_1 s + c_1, \quad v_2 = a_2 s^2 + b_2 s + c_2
+        $$
+        and let $\alpha_1, \alpha_2 \in \mathbb{R}$.
+
+        Then:
+        $$
+        A(\alpha_1 v_1 + \alpha_2 v_2)
+        = A\big((\alpha_1 a_1 + \alpha_2 a_2)s^2 + (\alpha_1 b_1 + \alpha_2 b_2)s + (\alpha_1 c_1 + \alpha_2 c_2)\big)
+        $$
+        $$
+        = (\alpha_1 c_1 + \alpha_2 c_2)s^2 + (\alpha_1 b_1 + \alpha_2 b_2)s + (\alpha_1 a_1 + \alpha_2 a_2)
+        $$
+        $$
+        = \alpha_1 (c_1 s^2 + b_1 s + a_1) + \alpha_2 (c_2 s^2 + b_2 s + a_2)
+        = \alpha_1 A(v_1) + \alpha_2 A(v_2)
+        $$
+
+        Therefore, $A$ is **linear**.
+        
+        ### Range Space and Null Space
+
+        Let $A: U \to V$ be a **linear map** between vector spaces $U$ and $V$ over the same field $F$.
+
+        1. **Range Space (Image)**
+        $$
+        R(A) := \{\,v \in V \;|\; A(u) = v \text{ for some } u \in U\,\}
+        $$
+
+        **Notes:**
+        - $R(A)$ (or $\text{Im}(A)$) is a **subspace** of $V$.
+        - The equation $A(u) = b$ has at least one solution **if and only if**
+            $$
+            b \in R(A)
+            $$
+
+        2. **Null Space (Kernel)**
+        $$
+        N(A) := \{\,u \in U \;|\; A(u) = 0_V\,\}
+        $$
+        **Note:** $N(A)$ is a **subspace** of $U$.
+
+        ---
+
+        ### Theorem
+
+        Let $A: U \to V$ be linear.
+
+        (i) The equation $A(u) = b$ has a **unique solution**  
+        $$
+        \iff N(A) = \{0_U\}
+        $$
+
+        (ii) Let $x_0$ be one particular solution of $A(x_0) = b$.  
+        Then every solution of $A(x) = b$ satisfies
+        $$
+        A(x) = b \iff (x - x_0) \in N(A)
+        $$
+
+        **Proof:**
+
+        From $A(x_0) = b$ and $A(x) = b$, subtract to get:
+        $$
+        A(x) - A(x_0) = 0_V \iff A(x - x_0) = 0_V
+        $$
+        Therefore, $(x - x_0) \in N(A)$.
+
+        ---
+        
+        **(i) ⇒ direction:**  
+        If $N(A) = \{0_U\}$, then for any $b \in R(A)$ there is at most one $u$ such that $A(u) = b$.  
+        Because if $A(u_1) = A(u_2) = b$, then:
+        $$
+        A(u_1 - u_2) = 0_V \implies (u_1 - u_2) \in N(A)
+        $$
+        Hence, $u_1 - u_2 = 0_U \implies u_1 = u_2$.  
+        Thus, the solution is unique.
+
+        **(i) ⇐ direction:**  
+        Suppose $A(u) = b$ has a unique solution for every $b \in R(A)$.  
+        If there existed a nonzero $u_0 \in N(A)$ with $A(u_0) = 0_V$, then both $u_0$ and $0_U$ would map to $0_V$, contradicting uniqueness.  
+        Hence, $N(A) = \{0_U\}$.
+
+        ---
+
+        ### Example 1: Simple Range and Null Space
+        Let
+        $$
+        A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \quad
+        u = \begin{bmatrix} u_1 \\ u_2 \end{bmatrix}, \quad
+        A(u) = v = \begin{bmatrix} u_1 \\ 0 \end{bmatrix}
+        $$
+
+        Here,
+        $$
+        R(A) = \text{span}\!\left(\begin{bmatrix}1 \\ 0\end{bmatrix}\right), \quad
+        N(A) = \text{span}\!\left(\begin{bmatrix}0 \\ 1\end{bmatrix}\right)
+        $$
+        confirming that $R(A) \subseteq \mathbb{R}^2$ and $N(A) \subseteq \mathbb{R}^2$ are both subspaces.
+
+        ---
+
+        ### Matrix Representation of a Linear Map
+
+        Let $\{u_1, u_2, \dots, u_n\}$ be a **basis** for $U$, and
+        $\{v_1, v_2, \dots, v_m\}$ be a **basis** for $V$.
+
+        Then, the **matrix representation** of $A$ in these bases is:
+        $$
+        [A]_{B_V,B_U} = 
+        \begin{bmatrix}
+        [A(u_1)]_{B_V} & [A(u_2)]_{B_V} & \dots & [A(u_n)]_{B_V}
+        \end{bmatrix}
+        \in F^{m \times n}
+        $$
+
+        ---
+
+        ### Example 2: A Map from $R^{2\times 2}$ to $P_2(\mathbb{R})$
+        $$
+        A: \mathbb{R}^{2\times 2} \to P_2(\mathbb{R})
+        $$
+        defined by
+        $$
+        A\!\left(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\right)
+        = (a - b) + (b - c)x + (c - d)x^2
+        $$
+
+        **Domain basis:**
+        $$
+        B_1 = \left\{
+        \begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix},
+        \begin{bmatrix}0 & 1 \\ 0 & 0\end{bmatrix},
+        \begin{bmatrix}0 & 0 \\ 1 & 0\end{bmatrix},
+        \begin{bmatrix}0 & 0 \\ 0 & 1\end{bmatrix}
+        \right\}, \quad \dim(B_1) = 4
+        $$
+
+        **Codomain basis:**
+        $$
+        B_2 = \{1, x, x^2\}, \quad \dim(B_2) = 3
+        $$
+
+        Compute $A$ on each basis element:
+        $$
+        \begin{aligned}
+        A\!\left(\begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix}\right) &= 1 \\
+        A\!\left(\begin{bmatrix}0 & 1 \\ 0 & 0\end{bmatrix}\right) &= -1 + x \\
+        A\!\left(\begin{bmatrix}0 & 0 \\ 1 & 0\end{bmatrix}\right) &= -x + x^2 \\
+        A\!\left(\begin{bmatrix}0 & 0 \\ 0 & 1\end{bmatrix}\right) &= -x^2
+        \end{aligned}
+        $$
+
+        The **matrix representation** of $A$ in these bases is therefore:
+        $$
+        [A]_{B_2,B_1} =
+        \begin{bmatrix}
+        1 & -1 & 0 & 0 \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & -1
+        \end{bmatrix}
+        \in \mathbb{R}^{3\times4}
+        $$
+
+        ---
+
+        ### Example 3: Computing a Transformation
+
+        Let
+        $$
+        C = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}
+        = 1\begin{bmatrix}1 & 0 \\ 0 & 0\end{bmatrix}
+        + 2\begin{bmatrix}0 & 1 \\ 0 & 0\end{bmatrix}
+        + 0\begin{bmatrix}0 & 0 \\ 1 & 0\end{bmatrix}
+        + 1\begin{bmatrix}0 & 0 \\ 0 & 1\end{bmatrix}
+        $$
+        So, in coordinates with respect to $B_1$:
+        $$
+        [C]_{B_1} =
+        \begin{bmatrix}1 \\ 2 \\ 0 \\ 1\end{bmatrix}
+        $$
+
+        Apply $A$:
+        $$
+        [A(C)]_{B_2} =
+        \begin{bmatrix}
+        1 & -1 & 0 & 0 \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & -1
+        \end{bmatrix}
+        \begin{bmatrix} 1 \\ 2 \\ 0 \\ 1 \end{bmatrix}
+        =
+        \begin{bmatrix} -1 \\ 2 \\ -1 \end{bmatrix}
+        $$
+
+        Hence,
+        $$
+        A(C) = -1 + 2x - x^2
+        $$
+
+        ---
+
+        ### Key Takeaways
+        - $R(A)$ = image = span of columns of $[A]$
+        - $N(A)$ = kernel = set of all $u$ such that $A(u) = 0$
+        - If $N(A) = \{0\}$ → transformation is **injective (one-to-one)**
+        - Matrix representation depends on chosen bases of domain and codomain
         """)
     
     # fig, ax = plt.subplots(figsize=(6, 4))
@@ -352,13 +620,482 @@ if section == "Week 1":
 if section == "Week 2":
     st.title("Week 2")
     
-    st.header("Lecture 4: Absent")
-    st.subheader("Tuesday, October 07, 2025")
-
-    st.divider()
-    st.header("Lecture 5: Absent")
-    st.subheader("Thursday, October 09, 2025")
+    w2_sub = st.radio("Lectures",
+            ["Lecture 4", "Lecture 5"])
     
+    if w2_sub == "Lecture 4":
+    
+        st.header("Lecture 4: Range, Null Space, and Rank–Nullity")
+        st.subheader("Tuesday, October 7, 2025")
+
+        st.markdown(r"""
+        ### Topics
+        - Range and Null Spaces
+        - Column Space and Basis
+        - Sum and Direct Sum of Subspaces
+        - Rank–Nullity Theorem
+        - Vector Norms
+
+        ---
+
+        ### 1. Null Space and Range Space of a Linear Map
+
+        For a matrix (or linear map) \(A: U \to V\),
+
+        - **Null space (kernel):**
+        $$
+        N(A) = \{\,x \in U \mid A x = 0\,\}
+        $$
+        It is a **subspace** of the domain \(U\).
+
+        - **Range space (image):**
+        $$
+        R(A) = \{\,A x \mid x \in U\,\}
+        $$
+        It is a **subspace** of the codomain \(V\).
+
+        ---
+
+        ### Example
+
+        Let
+        $$
+        A =
+        \begin{bmatrix}
+        1 & -1 & 0 & 0 \\
+        0 & 1 & -1 & 0 \\
+        0 & 0 & 1 & -1
+        \end{bmatrix} \in \mathbb{R}^{3\times4}
+        $$
+
+        **Find \(N(A)\):**
+        Solve \(A x = 0\).
+
+        \[
+        \begin{cases}
+        x_1 - x_2 = 0\\
+        x_2 - x_3 = 0\\
+        x_3 - x_4 = 0
+        \end{cases}
+        \Rightarrow x_1 = x_2 = x_3 = x_4
+        \]
+        Hence,
+        $$
+        N(A) = \text{span}\!\left(
+        \begin{bmatrix}1\\1\\1\\1\end{bmatrix}
+        \right)
+        $$
+
+        **Find \(R(A)\):**
+
+        The range (or column space) is the span of the columns of \(A\):
+        $$
+        R(A) = \text{span}\!\left(
+        \begin{bmatrix}1\\0\\0\end{bmatrix},
+        \begin{bmatrix}-1\\1\\0\end{bmatrix},
+        \begin{bmatrix}0\\-1\\1\end{bmatrix}
+        \right)
+        $$
+
+        Therefore,
+        $$
+        \dim N(A) = 1, \quad \dim R(A) = 3
+        $$
+
+        ---
+
+        ### 2. Rank–Nullity Theorem
+
+        Let \(A: U \to V\) be linear.
+
+        \[
+        \boxed{\dim(U) = \dim(N(A)) + \dim(R(A))}
+        \]
+
+        - \(\dim(N(A))\) is called the **nullity** of \(A\).
+        - \(\dim(R(A))\) is the **rank** of \(A\).
+
+        Example above:  
+        \(\dim(U)=4, \dim(N(A))=1, \dim(R(A))=3 \Rightarrow 4=1+3.\)
+
+        ---
+
+        ### 3. Sum and Direct Sum of Subspaces
+
+        Let \(U, W\) be subspaces of a vector space \(V\).
+
+        - The **sum** of \(U\) and \(W\) is:
+        $$
+        U + W = \{\,u + w \mid u \in U,\, w \in W\,\}
+        $$
+
+        - \(V\) is the **direct sum** of \(U\) and \(W\), denoted
+        $$
+        V = U \oplus W,
+        $$
+        if every \(v \in V\) can be written **uniquely** as \(v = u + w\),  
+        and \(U \cap W = \{0\}\).
+
+        Thus, for linear maps:
+        $$
+        U = N(A), \quad W = R(A), \quad \text{and } U \cap W = \{0\}
+        $$
+
+        ---
+
+        ### 4. Rank
+
+        The **rank** of a matrix \(A\) is:
+        $$
+        \text{rank}(A) = \dim(R(A))
+        $$
+
+        Equivalently, the number of **linearly independent columns** of \(A\).
+
+        ---
+
+        ### 5. Normed Vector Spaces
+
+        Let \((V, F)\) be a vector space.  
+        A **norm** on \(V\) is a function
+        $$
+        \|\cdot\| : V \to \mathbb{R}
+        $$
+        that satisfies, for all \(u, v \in V\) and scalar \(\alpha \in F\):
+
+        1. **Positive Definiteness:** \(\|v\| \ge 0,\) and \(\|v\| = 0 \iff v = 0\)
+        2. **Homogeneity:** \(\|\alpha v\| = |\alpha|\,\|v\|\)
+        3. **Triangle Inequality:** \(\|u + v\| \le \|u\| + \|v\|\)
+
+        ---
+
+        ### Common Examples of Norms on \(\mathbb{R}^n\)
+
+        1. **1-norm (Manhattan norm):**
+        $$
+        \|x\|_1 = \sum_{i=1}^{n} |x_i|
+        $$
+
+        2. **2-norm (Euclidean norm):**
+        $$
+        \|x\|_2 = \sqrt{\sum_{i=1}^{n} |x_i|^2}
+        $$
+
+        3. **∞-norm (Maximum norm):**
+        $$
+        \|x\|_\infty = \max_i |x_i|
+        $$
+
+        Each satisfies the three norm axioms.
+
+        ---
+
+        ### Key Takeaways
+        - \(R(A)\) = column space = span of columns of \(A\)
+        - \(N(A)\) = solution space of \(A x = 0\)
+        - \(\dim(U) = \text{rank}(A) + \text{nullity}(A)\)
+        - \(V = N(A) \oplus R(A)\) is a **direct sum**
+        - Norms give us a way to measure **lengths and magnitudes** in vector spaces
+        """)
+
+    if w2_sub == "Lecture 5":
+        st.header("Lecture 5: Normed and Inner Product Spaces")
+        st.subheader("Thursday, October 9, 2025")
+
+        st.markdown(r"""
+        ### Announcements
+        - No posting of notes going forward (sad 😢)
+        - Homework 1 will be posted this week!
+
+        ---
+
+        ### Definition: Normed Linear Space
+        Let $(V, F)$ be a vector space over the field $F$.
+
+        $(V, F)$ is a **normed linear space** if there exists a mapping
+        $$
+        \|\cdot\| : V \to \mathbb{R}^+
+        $$
+        that satisfies the following properties for all $v_1, v_2 \in V$ and $\alpha \in F$:
+
+        1. **Triangle Inequality:**
+        $$
+        \|v_1 + v_2\| \le \|v_1\| + \|v_2\|
+        $$
+        2. **Homogeneity:**
+        $$
+        \|\alpha v\| = |\alpha|\,\|v\|, \quad \alpha \in \mathbb{R}, \mathbb{C}
+        $$
+        3. **Positive Definiteness:**
+        $$
+        \|v\| = 0 \iff v = 0_V
+        $$
+
+        ---
+
+        ### Example 1: Vector Spaces of Matrices
+        Let $A \in F^{n\times n}$, where $F \in \{\mathbb{R}, \mathbb{C}\}$.
+
+        Different matrix norms include:
+
+        a) **1-Norm:**
+        $$
+        \|A\|_1 = \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|
+        $$
+
+        b) **Frobenius Norm:**
+        $$
+        \|A\|_F = \left( \sum_{i=1}^n \sum_{j=1}^n |a_{ij}|^2 \right)^{1/2}
+        $$
+
+        c) **Infinity Norm:**
+        $$
+        \|A\|_\infty = \max_{i,j} |a_{ij}|
+        $$
+
+        > **Note:** Induced norms will be discussed later.
+
+        ---
+
+        ### Example 2: Vector Spaces of Functions
+        Let $(V, F)$ be a linear vector space, and let $D$ be a set.  
+        Let $M : D \to V$ be a class of functions.  
+
+        Define:
+        $$
+        (f+g)(d) = f(d) + g(d), \quad (\alpha f)(d) = \alpha f(d)
+        $$
+        for all $f,g \in M$, $\alpha \in F$, and $d \in D$.
+
+        Then $M$, with these operations, is a linear space over $F$.
+
+        ---
+
+        ### Example 3: Continuous Functions
+        Continuous functions in $[t_0, t_1] \to \mathbb{R}^n$ are denoted as:
+        $$
+        C([t_0, t_1], \mathbb{R}^n)
+        $$
+
+        ---
+
+        ### Example 4: Norms on Vector Spaces of Functions
+        a) $L_1$-norm:
+        $$
+        \|f\|_1 = \int_{t_0}^{t_1} \|f(t)\|\,dt
+        $$
+
+        b) $L_2$-norm:
+        $$
+        \|f\|_2 = \left( \int_{t_0}^{t_1} \|f(t)\|^2\,dt \right)^{1/2}
+        $$
+
+        c) $L_\infty$-norm:
+        $$
+        \|f\|_\infty = \max_{t \in [t_0, t_1]} \|f(t)\|
+        $$
+
+        ---
+
+        ### Equivalence of Norms
+        Two norms $\|\cdot\|_a$ and $\|\cdot\|_b$ are **equivalent** if  
+        $\exists \alpha, \beta \in \mathbb{R}^+$ such that  
+        $$
+        \forall v \in V : \alpha \|v\|_a \le \|v\|_b \le \beta \|v\|_a
+        $$
+
+        ---
+
+        ### Example 5: Equivalence of Vector Norms in $(F^n, F)$
+        1. $\|x\|_\infty \le \|x\|_1 \le n \|x\|_\infty$
+        2. $\|x\|_\infty \le \|x\|_2 \le \sqrt{n}\|x\|_\infty$
+        3. $\dfrac{1}{\sqrt{n}}\|x\|_1 \le \|x\|_2 \le \|x\|_1$
+
+        > Proof for (2) and (3) left as an exercise.
+
+        ---
+
+        ### Proof of (1)
+        $\|x\|_\infty \le \|x\|_1 \le n \|x\|_\infty$
+
+        By definition:
+        $$
+        \|x\|_1 = \sum_{i=1}^n |x_i|, \quad
+        \|x\|_2 = \left( \sum_{i=1}^n |x_i|^2 \right)^{1/2}
+        $$
+
+        Then:
+        $$
+        \|x\|_2 = \left( \sum_{i=1}^n |x_i|^2 \right)^{1/2}
+        \le \left( \left( \sum_{i=1}^n |x_i| \right)^2 \right)^{1/2}
+        = \sum_{i=1}^n |x_i| = \|x\|_1
+        $$
+
+        Thus:
+        $$
+        \boxed{\|x\|_2 \le \|x\|_1}
+        $$
+
+        and
+        $$
+        \frac{1}{n}\|x\|_1^2 = \frac{1}{n}\left( \sum_{i=1}^n |x_i| \right)^2 \ge \frac{1}{n}\sum_{i=1}^n |x_i|^2
+        $$
+
+        Hence:
+        $$
+        \frac{1}{\sqrt{n}}\|x\|_1 \le \|x\|_2
+        $$
+
+        ---
+
+        ### Relation Between $\|x\|_2$ and $\|x\|_\infty$
+        $$
+        \|x\|_2 = \left( \|x\|_\infty^2 + \sum_{i \ne \text{max}} |x_i|^2 \right)^{1/2}
+        \le \left( \|x\|_\infty^2 + (n-1)\|x\|_\infty^2 \right)^{1/2}
+        = \sqrt{n}\|x\|_\infty
+        $$
+
+        Thus:
+        $$
+        \boxed{\|x\|_2 \le \sqrt{n}\|x\|_\infty}
+        $$
+
+        ---
+
+        ### Hilbert Spaces
+        Let $F = \mathbb{R}$ or $\mathbb{C}$ and consider the linear space $(H, F)$.
+
+        A function $\langle \cdot, \cdot \rangle : H \times H \to F$ is called an **inner product** if and only if:
+
+        a) $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$  
+        b) $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$  
+        c) $\langle x, x \rangle > 0 \iff x \ne 0$  
+        d) $\langle x, y \rangle = \overline{\langle y, x \rangle}$ (complex conjugate symmetry)
+
+        A vector space equipped with an inner product is called a **Hilbert Space**.
+
+        ---
+
+        ### Example 6
+        Let $(F^n, F, \langle \cdot, \cdot \rangle)$ with $F = \mathbb{R}$ or $\mathbb{C}$ be a Hilbert Space under the inner product:
+        $$
+        \langle x, y \rangle := \sum_{i=1}^n y_i \overline{x_i} = x^H y
+        $$
+        > (Here $x^H$ denotes the Hermitian transpose.)
+
+        ---
+
+        ### Orthogonality
+        In a Hilbert Space $(H, F, \langle \cdot, \cdot \rangle)$, two vectors are **orthogonal** if and only if:
+        $$
+        \langle x, y \rangle = 0
+        $$
+
+        #### Example 7
+        Consider $\mathbb{R}^2$:
+        $$
+        v_1 = \begin{bmatrix} 1 \\ 0 \end{bmatrix}, \quad
+        v_2 = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
+        $$
+        Then $\langle v_1, v_2 \rangle = v_1^T v_2 = 0$ ⇒ $v_1 \perp v_2$
+
+        Similarly:
+        $$
+        w_1 = \begin{bmatrix} -1 \\ 1 \end{bmatrix}, \quad
+        w_2 = \begin{bmatrix} -1 \\ -1 \end{bmatrix}
+        $$
+        Then $\langle w_1, w_2 \rangle = 0$ ⇒ $w_1 \perp w_2$
+
+        ---
+
+        ### Orthogonal Complement of a Subspace
+        Let $M \subseteq H$.  
+        The **orthogonal complement** of $M$ is defined as:
+        $$
+        M^\perp := \{ y \in H : \langle x, y \rangle = 0, \forall x \in M \}
+        $$
+
+        ---
+
+        ### Fundamental Theorem of Linear Algebra
+        Let $A: \mathbb{R}^n \to \mathbb{R}^m$. Then:
+
+        (i) $\mathcal{N}(A)^\perp = \mathcal{R}(A^T)$  
+        (ii) $\mathcal{R}(A)^\perp = \mathcal{N}(A^T)$
+
+        **Proof of (i):**
+
+        We note that showing (i) is equivalent to showing  
+        $$
+        \mathcal{N}(A) = \mathcal{R}(A^T)^\perp
+        $$
+
+        Let $x \in \mathbb{R}^n$, $x \in \mathcal{N}(A)$:
+        $$
+        Ax = 0 \implies y^T A x = 0, \ \forall y \in \mathbb{R}^m
+        $$
+        $$
+        (A^T y)^T x = 0, \ \forall y \in \mathbb{R}^m
+        $$
+        ⇒ $x \perp A^T y$, i.e. $x \perp \mathcal{R}(A^T)$  
+        ⇒ $\mathcal{N}(A) \subseteq \mathcal{R}(A^T)^\perp$
+
+        Conversely, let $x \in \mathcal{R}(A^T)^\perp$:
+        $$
+        (A^T y)^T x = 0 \ \forall y \in \mathbb{R}^m
+        \implies y^T (A x) = 0 \ \forall y \in \mathbb{R}^m
+        \implies A x = 0
+        $$
+        Thus, $x \in \mathcal{N}(A)$ ⇒ $\mathcal{R}(A^T)^\perp \subseteq \mathcal{N}(A)$  
+        Hence:
+        $$
+        \boxed{\mathcal{N}(A) = \mathcal{R}(A^T)^\perp}
+        $$
+
+        ---
+
+        ### Example 8
+        Let $M = \text{span}\{v_1, v_2\}$ with
+        $$
+        v_1 = \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix}, \quad
+        v_2 = \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix}
+        $$
+        Find $M^\perp$.
+
+        Since $M \subset \mathbb{R}^3$ and $\dim(M) = 2$,  
+        by definition:
+        $$
+        M^\perp = \{ w : v_1^T w = 0, \ v_2^T w = 0, \ w \in \mathbb{R}^3 \}
+        $$
+
+        Compute:
+        $$
+        \begin{bmatrix} v_1^T \\ v_2^T \end{bmatrix}
+        = \begin{bmatrix} -1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+        $$
+
+        The null space of this matrix gives:
+        $$
+        x_1 = x_2, \ x_3 = 0 \implies w = \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}
+        $$
+
+        Thus:
+        $$
+        M^\perp = \text{span}\left\{ \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix} \right\}
+        $$
+
+        ---
+
+        ### Summary of Relationships
+        $$
+        \mathbb{R}^3 = \text{span}\left\{
+        \begin{bmatrix} -1 \\ 1 \\ 0 \end{bmatrix},
+        \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix},
+        \begin{bmatrix} 1 \\ 1 \\ 0 \end{bmatrix}
+        \right\}
+        $$
+        """)
+
 if section == "Week 3":
     st.title("Week 3")
     
@@ -778,3 +1515,317 @@ if section  == "Week 4":
     
     
     """)
+    
+    st.divider()
+    st.header("Lecture 9")
+    
+if section == "Week 5":
+    st.title("Week 5")
+    st.header("Lecture 10:")
+    st.subheader("Tuesday, October 28, 2025")
+    
+    st.markdown(r"""
+       
+     ### Recap
+     
+     $$
+     \dot{X}(t) = A(t) X(t), \quad x(t) \in R^m, A(t) \in R^{m \times m}
+     $$        
+     
+     and $\Phi(t, t_0)$ is the solution to the MDE $X(t)$ with initial condition
+     
+     $$
+     X(t_0) = \Phi(t_0, t_0) = I
+     $$
+     
+     ### Vector Differential Equation
+     
+     $$
+     \dot{x}(t) = A(t) x(t), \quad x(t) \in R^m \\
+         x(t_0) = x_0 \\
+        x(t) = \Phi(t, t_0)x_0 \quad \text{is the solution to the VDE}
+     $$
+                
+    ### Solutions to forced/non-autonomous VDE
+    
+    #### Linear Time Varying Case
+    $$
+    \underbrace{\dot{x}(t)}_{n\times 1} = \underbrace{A(t)}_{n\times n} \underbrace{x(t)}_{n \times 1} + \underbrace{B(t)}_{n \times n_i} \underbrace{u(t)}_{n_i \times t}, \quad x(t_0) = x_0
+    $$
+    
+    How do solutions to this problem look like?
+    
+    **Theorem:**
+    
+    The solution is given by 
+    $$
+    \boxed{
+    x(t) = \Phi(t, t_0)x_0 + \int_{t_0}^t \Phi(t, \tau) B(\tau)u(\tau)d\tau
+    }
+    $$
+    
+    **Proof:**
+    
+    1) Initial Condition: 
+    $$
+    \begin{array}{l}
+    x(t_0) = \Phi(t_0, t_0) + \int_{t_0}^{t_0} [f(t_0, \tau)=0]B(\tau)u(\tau)d\tau\\
+        = I \cdot x_0\\
+        = x_0 \quad \square
+    \end{array}
+    $$
+    
+    2) Differential Equation: show $x(t)$ satisfies the equation
+    - Recall Leibniz rule:
+    $$
+    \frac{\partial}{\partial z} \int_{a(z)}^{b(z)} f(x, z) dx = \frac{\partial b}{\partial z} \cdot f(b, z) - \frac{\partial a}{\partial z} f(a, z) + \int_{a(z)}^{b(z)}\frac{\partial f}{\partial z} dx
+    $$
+    
+    Using this, we get that 
+    $$
+    \dot{x}(t) = A(t) \Phi(t, t_0)x_0 + \frac{\partial}{\partial t}(t) f(t, t) - [\frac{\partial}{\partial t}(t_0) = 0] + \int_{t_0}^t \frac{\partial f}{\partial t} \partial \tau\\
+        = A(t) \Phi(t, t_0)x_0 + \underbrace{\Phi(t, t)}_I B(t)u(t) + \int_{t_0}^{t} A(t)\Phi(t, \tau) B(\tau)u(\tau)d\tau \\
+        = A(t)\underbrace{[\Phi(t, t_0)x_0 + \int_{t_0}^t \Phi(t, \tau)B(\tau)d\tau]}_{x(t)} + B(t)u(t)\\
+        \implies \dot{x(t)} = A(t)x(t) + B(t) u(t) \quad \square
+    $$
+    
+    ### Jacobian Linearization:
+    $$
+    \dot{x} = f(x, u, t), \quad x(t_0) = x_0
+    $$
+    
+    Let the input $u^0(\cdot)$ result in the state $x^0(\cdot)$
+    
+    Now let $u^0(\cdot)$ be perturbed to $u^0(\cdot) + \delta u(\cdot)$ with resultant state perturbation $x^0(\cdot) + \delta x(\cdot)_n$
+    
+    Also let the initial condition be perturbed to $x_0 + \delta x_0$
+    
+    $$
+    \dot{x}^0 = f(x^0, u^0, t), \quad x^0(t_0) = x_0
+    $$
+    
+    Now consider what happens to the perturbation
+    $$
+    \dot{x}^0 + \delta \dot{x} = f(x^0 + \delta x, u^0 + \delta u, t), \quad x^0 + \delta x(t_0) = x_0 + \delta x_0
+    $$
+    
+    By Taylor Expansion around $(x^0, u^0)$:
+    
+    $$
+    f(x^0 + \delta x, u^0) + \underbrace{\frac{\partial}{\partial x}f(x, u, t)|_{x^0, u^0}}_{\text{Jacobian wrt }x}\cdot \delta x + \underbrace{\frac{\partial}{\partial u} f(x, u, t)|_(x^0, u^0)}_{\text{Jacobian wrt }u} \cdot \delta u + H.O.T
+    $$
+    *higher order terms are assumed to go to zero since $\delta x, \delta u$ are small so $(\delta x)^2, (\delta u)^2$ are very small
+    
+    $$
+    \dot{(\delta x)} = \underbrace{D_x f |_{x^0, u^0}}_{n\times n: A(t)} \cdot \delta x + \underbrace{D_u f|_{x^0, u^0}}_{n\times n_i: B(t)} \cdot \delta u
+    $$
+    
+    #### Example: Pendulum
+    $$
+    \theta, m, l, \tau\\
+    ml^2 \ddot{\theta} - mgl sin \theta = \tau \\
+    $$
+    Introduce: $x_1 = \theta, x_2 = \dot{\theta}$
+    $$
+    \implies ml^2 \dot{x}_2 - mgl sin(x_1) = \tau\\
+    \dot{x}_2 = \frac{g}{l} sin(x_1) + \underbrace{\frac{\tau}{ml^2}}_u
+    $$
+    define $\Omega^2 = \frac{g}{l}$
+    $$
+    = \Omega^2 sin(x_1) + u\\
+    \implies \dot{x} = f(x_1, u) = \begin{bmatrix} x_2 \\ \Omega^2 sin(x_1) + u \end{bmatrix}
+    $$
+    
+    **Linearization around vertical position:** 
+    $$
+    (x_1^0 = 0, \tau^0 = 0)
+    $$
+    
+    $$
+    \implies \dot{(\delta x)} = \begin{bmatrix} 0 & 1 \\ \Omega^2 cos(x_1) & 0 \end{bmatrix}|_{0,0}\cdot \delta x + \begin{bmatrix} 0 \\1 \end{bmatrix} \cdot \delta u\\
+    \implies \dot{(\delta x)} = \begin{bmatrix} 0 & 1 \\ \Omega^2 & 0\end{bmatrix} \delta x+ \begin{bmatrix} 0 \\ 1 \end{bmatrix} \delta u
+    $$
+    
+    ### Summary
+    - Showing that the solution to the MDE is the solution to the VDE (specific form)
+    - Given by "theorem"
+    - Prove it actually satisfies the linear time varying vector differential equation by Leibniz rule
+    - Did linearization looking at a non linear system and now understand linear time varying systems as linearizations of non linear systems
+    - Gave example of how linearization looks like
+    """)
+    
+    st.divider()
+    st.header("Lecture 11:")
+    st.subheader("Thursday, October 30, 2025")
+    st.markdown(r"""
+    ### Matrix Exponential
+    
+    #### Linear Time Invariant Case
+    $$
+    \dot{x}(t) = Ax(t) + Bu(t)
+    $$
+    
+    **Claim:** the state transition matrix for $\dot{x}(t) = A(t) x(t)$ is 
+    $$
+    \Phi(t, t_0)=exp(A(t-t_0))
+    $$
+    
+    where
+    $$
+    \underbrace{exp(At)}_{n \times n} = \underbrace{I}_{n \times n} + \underbrace{A}_{n \times n \cdot 1}t + \frac{A^2}{2!}t^2 + \frac{A^3}{3!}t^3 + \dots 
+    $$
+    
+    **Proof:**
+    We know that the solution to $\dot{x} = Ax, x(t_0) = x_0$ is $x(t) = \Phi(t, t_0)x_0$
+    $$
+    \implies x(t) = exp(A(t-t_0))x_0
+    $$
+    then $x(t_0) = exp(A \cdot (t_0 - t_0))x_0 = exp(0)\cdot x_0 = x_0$
+    
+    #### Does it satisfy the Differential Equation?
+    $$
+    \dot{x}(t) = \frac{d}{dt}[exp(A(t-t_0))x_0] = \frac{d}{dt}\left( I + A(t-t_0) + \frac{A^2}{2!}(t-t_0)^2 + \dots\right)x_0\\
+    = [0 + A + A(t-t_0)t + \frac{A^3}{2!}(t-t_0)^2 + \dots]x_0\\
+    = A[I + A(t-t_0)+\frac{A^2}{2!}(t-t_0)^2 + \dots]x_0\\
+    = A[exp(A(t-t_0))]x_0 = Ax(t)
+    $$
+    
+    ### Properties of $e^{At}$:
+    
+    1) $e^0 = I_{n \times n}$
+    2) $e^{A(t+s)} = e^{At} \cdot e^{As}$
+    3) $e^{(A+B)t} = e^{At} \cdot e^{Bt} \iff AB = BA$
+    4) $(e^{At})^{-1} = e^{A(-t)} = e^{-At}$
+    5) $\frac{d}{dt} e^{At} = A \cdot e^{At}$
+    6) $X(t) \in R^{n \times n} \rightarrow \dot{X}(t) = AX(t), X(0)= I$ the solution is given by $X(t) = e^{At}$
+    
+    #### Computing $e^{At}$:
+    
+    > "26 dubious ways of computing the matrix exponential!"
+    
+    #### 1) Power Series (only if $A$ is nonpotent, but in general a bad iea numerically; only good for analysis)
+    $$
+    A = \begin{bmatrix}0 & 1\\0 & 0\end{bmatrix} \rightarrow A^2 = \begin{bmatrix}0 & 0 \\0 & 0\end{bmatrix} \implies e^{At} = I + At + 0 \dots
+    $$
+    - good idea if $A$ has structure which allows infinite series to become finite
+    $$
+    = \begin{bmatrix} 1 & t \\0 & 1\end{bmatrix}
+    $$
+    
+    #### 2) $\begin{cases}\dot{x}(t) = Ax(t), \quad x(t) \in R^{n \times n}\\ X(0) = I \end{cases}$
+    $$
+    L\{f\}(s) = \int_0^\infty f(t)e^{-st}dt\quad t\in R_t, s \in C
+    L(\cdot) = s\hat{X}(s) - \hat{x}(0) = A\hat{X}(s) \\
+    \iff(sI - A)\hat{X}(s) = x(0) = I\\
+    \iff \hat{x}(s) = (sI - A)^{-1}\\
+    \rightarrow X(t) = L^{-1}\{(sI -A)^{-1}\}
+    $$
+    and we know that
+    $$
+    X(t) = e^{At}\\
+    \implies e^{At} = L^{-1}\{(sI - A)^{-1}\}
+    $$
+    
+    **Example**
+    $$
+    A = \begin{bmatrix}0 & 1\\0 & 0\end{bmatrix}
+    $$
+    Then: $(sI - A) = \begin{bmatrix}s & -1\\0 & s\end{bmatrix}$
+    $$
+    (sI - A)^{-1} = \frac{1}{s^2}\begin{bmatrix}s & +1 \\0 & s\end{bmatrix} = \begin{bmatrix}\frac{1}{s} & \frac{1}{s^2} \\ 0 & \frac{1}{s}\end{bmatrix}
+    $$
+    $$
+    \implies L^{-1}\{(sI - A)^{-1}\} = L^{-1}\{\begin{bmatrix}\frac{1}{s} & \frac{1}{s^2} \\ 0 & \frac{1}{s}\end{bmatrix}\} = \begin{bmatrix}1 & t \\0 & 1\end{bmatrix}
+    $$
+    
+    #### Recall: 
+    $$
+    \dot{x} = Ax + Bu, x(t_0) = x_0, x \in R^n\\
+    y = Cx + Du
+    $$
+    $$
+    x(t) = \Phi(t, t_0)x_0 + \int_{t_0}^t \Phi(t, \tau)B u(\tau)d\tau\\
+        = e^{A(t-t_0)}x_0 + \int_{t_0}^t e^{A(t - \tau)}Bu(\tau)d\tau
+    $$
+    
+    #### Cayley - Hamilton Theorem
+    $$
+    (sI - A)^{-1} = \frac{\text{Adjugate}(sI - A)}{\text{det}(sI - A)}
+    $$
+    
+    **Example**: $\begin{bmatrix}a & b \\c & c\end{bmatrix} = \frac{1}{ad - bc} \cdot \begin{bmatrix}d & -b \\-c & a\end{bmatrix}$
+    
+    $$
+    det(sI - A) = s^n + d_1 s^{n-1} + d_2 s^{n-2} + \dots d_n\\
+    = X_A(s) = \text{characteristic polynomial of }A
+    $$
+    
+    $$
+    \text{Adjugate}(sI - A) = B_0 s^{n-1} + B_1 s^{n-2} + \dots + B_{n-1}
+    $$
+    $B_i$ are $n \times n$ matrices
+    
+    **Cayleight- Hamilton Theorem**:$\\$
+    $$
+    \text{Every matrix A satisfies its own characteristic polynomial}
+    $$
+    $$
+    X_A(A) = A^n + d_1 A^{n-1} + d_2 A^{n-2} + \dots + d_n I = O_{n\times n}
+    $$
+    
+    **Note:** Let $\hat{p}_1(s), \hat{p}_2(s)$ be two polynomials in $s$/
+    
+    **Then:** 
+    $$
+    \frac{\hat{p}_1(s)}{X_A(s)} = \hat{q}_1(s) + \frac{\hat{r}_1(s)}{X_A(s)} \rightarrow \hat{p}_1(s) = \hat{q}_1(s)X_A(s) + \hat{r}_1(s)\\
+    \frac{\hat{p}_2(s)}{X_A(s)} = \hat{q}_2(s) + \frac{\hat{r}_2(s)}{X_A(s)} \rightarrow \hat{p}_2(s) = \hat{q}_2(s)X_A(s) + \hat{r}_2(s)
+    $$
+    Even if $\hat{p}_1(s) \neq \hat{p}_2(s)$, if $\hat{r}_1(s) = \hat{r}_2(s)$ then
+    $$
+    \hat{p}_1(A) = \hat{p}_2(A) \implies \text{polynomials evaluated in A are the same}
+    $$
+    
+    To see this:
+    $$
+    \hat{p}_1 = \hat{q}_1(A)[X_A(s) = 0] + \hat{r}_1(A) \quad \rightarrow \hat{p}_1(A) = \hat{p}_2(A) \\
+    \hat{p}_2 = \hat{q}_2(A)[X_A(s) = 0]  + \hat{r}_2(A) \quad \text{                      if } \hat{r}_1 = \hat{r}_2
+    $$
+    
+    This implies that every polynomial function of $A$ can be written as a function of powers of $A$, up to the order $A^{n-1}$ which means
+    a polynomial in the $I, A, A^2, \dots, A^{n-1}$
+    
+    #### Initial Conditions and Eigenvectors
+    $$
+    \dot{x} = Ax, \quad x_0, \quad \text{we have }x(t) = e^{At}x_0
+    $$
+    
+    Lets assume $x_0 = \alpha_i(0)v_i$
+    $$
+    Av_i = \lambda_i v_i
+    \implies x(t) = e^{At} \cdot \alpha_i v_i\\
+    = (I + At + \frac{A^2t^2}{2!} + \frac{A^3 t^3}{3!} + \dots)\alpha_i v_i\\
+    = (v_i + \lambda_i v_i t + \frac{1}{2!} \lambda_i^2 t_2 v_i + \dots) \alpha_i\\
+    = (1 + \lambda_i t + \frac{\lambda_i^2}{2!}t^2 \frac{\lambda_i^3}{3!}t^3 + \dots)\alpha_i v_i\\
+    = \underbrace{e^{\lambda_i t}}_{\text{scalar}}\cdot \underbrace{\alpha_i v_i}_{x(0) \text{eigenvectors}}
+    $$
+    #### $e^{At}$ and diagonalization of $A$
+    
+    $$
+    A = VDV^{-1}
+    \implies e^{At} = exp(VDV^{-1})\\
+    = I + (VDV^{-1})t + (VDV^{-1})^2\frac{t}{2!} + (VDV^{-1})^3 \frac{t^3}{3!} + \dots\\
+    = V(I + D + D^2 \frac{t^2}{2!} + D^3\frac{t^3}{3!})V^{-1}\\
+    = Ve^{Dt}V^{-1}
+    $$
+    much easier to compute, can even use power series here
+    
+    **Also Note:** 
+    $$
+    e^{Dt} = L^{-1}\{(sI-D)^{-1}\}\\
+    = L^{-1}\{\begin{bmatrix} s-\lambda_1 & & \\ & \ddots & \\ & & s-\lambda_m\end{bmatrix}^{-1}\}\\
+    = L^{-1}\{\begin{bmatrix} \frac{1}{s-\lambda_1} & & \\ & \ddots & \\ & & \frac{1}{s-\lambda_m}\end{bmatrix}\}\\
+    \implies e^{At} = V \text{diag}(e^{\lambda_i t}) V^{-1}
+    $$    
+    
+    """)
+    
