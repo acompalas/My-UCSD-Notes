@@ -10,7 +10,10 @@ section = st.selectbox(
         "Week 2",
         "Week 3",
         "Week 4",
-        "Week 5"
+        "Week 5",
+        "Week 6",
+        "Week 7",
+        "Week 8"
     ],
 )
 
@@ -2171,3 +2174,489 @@ if section == "Week 5":
     
     """)
     
+if section == "Week 6":
+    st.title("Week 6")
+    st.header("Lecture 12")
+    st.subheader("Tuesday, November 4, 2025")
+    st.markdown(r"""
+    ### C + D, Chapter 4 and Hesphana Chapter 7
+    
+    ### Definition
+    A subspace $M \subseteq U$ is A-invariant if $\forall \mu \in M \implies A u \in M$. We denote this will $A[M] < M$.
+    
+    #### Example
+    #### 1) $N(S) is invariant
+    
+    **Proof**
+    Let $x \in N(A) \iff Ax = 0$. Is $0 \in N(A)$?
+    
+    Yes, since $A0 = 0$ (A is a linear operator)       
+    #### 2) $R(A)$ is $A$-invariant $\to$ show this!
+    
+    #### 3) $N(A-\lambda I)$ is $A$ invariant, if $\lambda_i = $eigenvalues of $A$ 
+    #### If $M_1$ and $M_2$ are $A$-invariant, then
+    - **$(i)$**: $M_1 + M_2$ is
+    - **$(ii)$** $M_1 \cap M_2$ is
+    
+    ### 1st Representation Theorem (see Lecture 4)
+    Any linear map can be represented by a matrix $A$ where the $j$-th column of the $A$ is $A(\mu_i)$ written as a coordinate vector in the basis $\{v_i\}$
+    $$
+    \{\mu_j\} \leftarrow \text{Basis } \rightarrow \{v_j\}
+    $$
+    
+    ### 2nd Representation Theorem
+    Let $\underbrace{V}_{\text{dim} = n} = \underbrace{M_1}_{\text{dim} = k} \oplus \underbrace{M_2}_{\text{dim}=n-k}, A: V \to V$.
+    
+    If $M_1$ is $A$ invariant, then $A$ has the representation
+    
+    $$
+    A = \begin{bmatrix}\overbrace{A_{11}}^{k} & \overbrace{A_{12}}^{n - k}\}^{k}\\ 0 & A_{22}\}^{n-k}\end{bmatrix}
+    $$
+    
+    Further if $M_1$ and $M_2$ are $A$-invariant, then:
+    $$
+    A = \begin{bmatrix}A_{11} & 0 \\0 & A_{22}\end{bmatrix}
+    $$
+    
+    **Proof**
+    Let $\{b_1, b_2, \dots, b_3\}$ be a basis for $M_1$ and $\{b_{k+1}, \dots, b_n\}$ be a basis for $M_2$.
+    
+    For $x \in M_1 \implies x = \sum_{i=1}^k \alpha_i b_i \to Ax$
+    
+    Since $A$ is $A$-invariant, $Ax \in M_1 \to Ax = \sum_{i=1}^k \beta_i b_i$
+    
+    Put differently:
+    $$
+    Ab_1 = n_1 b_1 + \dots + n_k b_k + 0b_{k+1} + \dots + 0b_n\\
+    Ab_k = \zeta_1 b_1 + \dots \zeta_k b_k + 0 b_{k+1} + \dots + 0b_n
+    $$
+    
+    **Writing this in matrix form using the 1st representatino theorem:**
+    $$
+    \begin{bmatrix} \begin{bmatrix} n_1 & & \zeta_1 \\\vdots & \dots & \vdots \\ n_k & & \zeta_k\end{bmatrix} & A_{12}\\ 
+    \underbrace{\begin{bmatrix}0 & & 0\\\vdots & & \vdots\\0 & & 0\end{bmatrix}}_k & A_{22}\end{bmatrix}
+    $$
+    
+    #### Minimal Polynomial of A
+    Consider characteristic polynomial $A \in R^{n\times n}$
+    $$
+    \chi_A(s) = det(sI - A) = (s-\lambda_i)^{d_1}(s-\lambda_2)^{d_2}(s-\lambda_k)^{d_k}
+    $$
+    where $d_i$ are the algebraic multiplicities of $\lambda_i \in C$ and 
+    $$
+    d_1 + d_2 + \dots + d_k = n
+    $$
+    
+    Reminder: By Cayely-Hamilton Theorem $\chi_A(A) = 0_{n\times n}$
+    
+    **Def**: The minimal polynomial $\psi_4(5)$ is the polynomial of least degree such that
+    $$
+    \Psi_A(A) = 0_{n\times n}
+    $$
+    
+    #### Theorem
+    $$
+    \Psi_A(s) \text{ divides }\chi_A(s) \text{ if } \Psi_A(s) = (s-\lambda_i)^{m_1}\dots(s-\lambda)^{m_k}, \quad m_i \leq d_i
+    $$
+    
+    ### Examples ($\chi_A$ vs. $\Psi_A$)
+    
+    #### 1)
+    $$
+    A = \begin{bmatrix}\lambda_1 & & \\ & \lambda_1 & \\ & & \lambda_2\end{bmatrix}\\
+    \downarrow \\
+    \chi_A(s) = (s-\lambda_1)^2(s-\lambda_2)\\
+    \Psi_A(s) = (s-\lambda_1)(s-\lambda_2) \rightarrow \text{Check }\Psi_A(A) = 0_{3 \times 3}
+    $$
+    diagonalize matrix repeated eigenvalues
+    
+    #### 2)
+    $$
+    \begin{bmatrix} \begin{bmatrix} \lambda_1 & 1 \\0 & \lambda_1\end{bmatrix}& \\ & \lambda_2\end{bmatrix}\\
+    \downarrow\\
+    \chi_A(s) = (s-\lambda_1)^2 \cdot (s-\lambda_2)\\
+    \Psi_A(s) = (s-\lambda)^2(s-\lambda_2) \rightarrow \text{Check}
+    $$
+    
+    #### Jordan Form:
+    **Example**
+    $$
+    \chi_A(s) = (s-\lambda)^{d_1}, \quad d_1 = 6\\
+    \Psi_A(s) = (s-\lambda)^{m_1}, \quad m_1 = 3
+    $$
+    
+    #### (1) $N(A-\lambda I) = \text{span}\{e_1, e_2, e_3\}$
+    $$
+    \implies (A-\lambda I)e_i = 0, \quad i = 1, 2, 3
+    $$
+    
+    #### (2) $N((A-\lambda I)^2) = \text{span}\{e_1, e_2, e_3, v_1, v_2\}$
+    Linearly independent to $\{e_1, e_2, e_3\}$
+    $$
+    (A-\lambda I)x = e_1\\
+    (A-\lambda I)x = e_2\\
+    (A-\lambda I)x = e_3
+    $$
+    
+    #### $N((A-\lambda I)^3) = \text{span}\{e_1, e_2, e_3, v_1, v_2, w_1\}$
+    $w_1$ solves:
+    $$
+    (A-\lambda I)x = v_1\\
+    (A-\lambda I)x = v_2
+    $$
+    
+    #### (1)
+    $$
+    Ae_1 = \lambda e_1\\
+    Ae_2 = \lambda e_2\\
+    Ae_3 = \lambda e_3\\
+    \{e_1, e_2, e_3\}
+    $$
+    eigenvectors
+    
+    #### (2)
+    $$
+    (A-\lambda I)v_1 = e_1\\
+    Av_1 = \lambda v_1 + e_1
+    $$
+    and similarly
+    $$
+    A v_2 = \lambda_1 v_2 + e_2\\
+    \{v_1, v_2\}
+    $$
+    generalized eigenvalues of degree 1
+    
+    #### (3)
+    $$
+    (A - \lambda I) w_1 = v_1\\
+    A w_1 = \lambda w_1 + v_1\\
+    \{w_1\}\\
+    $$
+    generalized eigenvector of degree 1
+    
+    $$
+    \implies \text{All } \{e_1, v_1, w_1, e_2, v_2, e_3\} \text{ are linearly independent}
+    $$
+    
+    The representation of $A$ with respect to the basis $\{e_1, v_1, w_1, e_2, v_2, e_3\}$ is:
+    $$
+    \left[ A(e_1) \quad A(v_1) \quad A(w_1) \quad A(e_2) \quad A(v_2) \quad A(e_3)\right]
+    $$
+    
+    $$
+    \zeta = \begin{bmatrix} \begin{bmatrix} \lambda & 1 & \\ & \lambda & 1 \\ & & \lambda\end{bmatrix} & & \\
+    & \begin{bmatrix} \lambda & 1 \\ & \lambda\end{bmatrix} & \\
+    & & \lambda \end{bmatrix}
+    $$
+    and
+    $$
+    A = T \zeta T^{-1}
+    $$
+    where
+    $$
+    T = \begin{bmatrix} e_1 & v_1 & w_1 & e_2 & v_2 & e_3\end{bmatrix}
+    $$
+    """)
+    
+if section == "Week 7":
+    st.title("Week 7")
+    st.header("Lecture 13")
+    st.subheader("Thursday, 11/13/25")
+    
+    st.markdown(r"""
+    
+    ### System Stability (C + D, Ch. 7, Hesphana, Ch. 9)
+    
+    #### Bounded-Input Bounded Output
+    
+    $$
+    \in R^{n_i} \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \quad \in R^{n_0}\\
+    \underbrace{u(t)}_{\text{inputs: forces, torques, inflow}} \rightarrow \underbrace{\boxed{h(t)}}_{R^{n_0 \times n_i}} \rightarrow \underbrace{y(t)}_{\text{outputs: positions, velocities, pressure}}
+    $$
+    
+    #### Linear Time-Varying
+    
+    $$
+    \dot{x} = A(t)x + B(t) u\\
+    y = C(t)x + D(t) u
+    $$ 
+    
+    #### 1) Solution
+    $$
+    x(t) = \underbrace{\Phi(t, t_0)x_0}_{\text{Natural response}} + \underbrace{\int_{t_0}^t \Phi(t, \tau) B(\tau) u(\tau)d\tau}_{\text{Forced Response}}
+    $$
+    
+    #### 2) Response Map
+    $$
+    \rho(t, t_0, x_0, u(\cdot)) = C(t) \Phi(t, t_0)x_0 + \int_{t_0}^t C(t)\Phi(t, \tau)B(\tau)d\tau + D(t) u
+    $$
+    
+    #### 3) Forced Response
+    **Zero-State Response**
+    $$
+    \rho(t, t_0, 0, u(\cdot)) = \int_{t_0}^t h(t, \tau) u(\tau)d\tau
+    $$
+    
+    where
+    $$
+    h(t, \tau) = C(t)\Phi(t, \tau)B(\tau) + D(t) \underbrace{\delta(t-\tau)}_{\text{Dirac Delta Function}}
+    $$
+    
+    #### For Linear Time Invarying
+    $$
+    h(t, t_0) = h(t - t_0) = C \cdot exp(A(t-t_0))B + D
+    $$
+    
+    #### Definition: 
+    A system is **BIBO** stable if $\exists k < \infty$ s.t. $||y(t)||_\infty \leq k \cdot ||u(t)||_\infty \quad \forall u: ||u(t)||_\infty < \infty$
+    
+    > Bounded Inputs result in Bounded Outputs
+    >> You can only check for BIBO stability for finite inputs
+    
+    ---
+    #### Aside
+    $$
+    ||A||_2 = \underbrace{sup}_{||x||_2 = 1} ||Ax||_2 = \sigma_1 (A)
+    $$
+    - The maximum stretch the $A$ vector can act on any vector
+    ---
+    ### Time + Frequency domain condition for BIBO stability
+    
+    #### Theorem: 
+    The linear system (LTI or LTV) is BIBO stable $\iff \underbrace{sup}_{t \geq 0} \left( \int_0^t ||h(t, \tau||_{i, \infty} d\tau \right) = k < \infty$
+    
+    **Proof: Hespana Chapter 9 page 109**
+    
+    #### Theorem:
+    An LTI system is BIBO stable $\iff \underbrace{sup}_{t \geq 0} \left(\int_0^t ||Ce^{At}B|| dt \right) < \infty$
+    
+    $\iff \underbrace{\text{ Poles of }}_{\text{Laplace condition of stability}} H(\zeta) = C(\zeta I - A)^{-1}B + D \subset \underbrace{C}_{\text{Open left hand plane}}$
+    
+    ---
+    ### Transfer Function
+    $$
+    \dot{x} = Ax + Bu\\
+    y = Cx + Du\\
+    x(0) = x_0\\
+    t \in R \to \zeta \in C
+    $$
+    
+    Apply Laplace Transform
+    
+    $$
+    sX(s) - x_0 = AX(s) +  BU(s)\\
+    (sI - A)X(s) = x_0 + BU(s)\\
+    X(s) = (sI - A)^{-1}x_0 + (sI - A)^{-1}BU(s) \quad \text{ if }(sI-A) \text{ is unstable}\\
+    \downarrow\\
+    Y(s) = \underbrace{C \cdot (sI - A)^{-1}x_0}_{\text{natural response}} + \underbrace{\left(C(sI-A)^{-1}B + D \right)U(s)}_{\text{response with }x_0 = 0}
+    $$
+    $\implies$ Transfer function on LTI system is
+    $$
+    H(s) = \frac{Y(s)}{U(s)} = C(sI - A)^{-1}B + D
+    $$
+    
+    ### Example 1
+    $$
+    A = \begin{bmatrix} -1 & & \\ & -3 & \\ & & -6\end{bmatrix} \quad B = \begin{bmatrix}1/10 \\ -1/6 \\ 1/15\end{bmatrix}, \quad C = \begin{bmatrix} 1 & 1 & 1 \end{bmatrix},\quad D = 0
+    $$
+    $\implies x(t) \in R^3, y(t) \in R_1, u(t) \in R)$ (SISO)
+    $$
+    H(s) = C((sI - A)^{-1})B = \begin{bmatrix}1 & 1 & 1\end{bmatrix}\begin{bmatrix} s + 1 & & \\ & s + 3 & \\ & & s + 6\end{bmatrix} \begin{bmatrix}1/10 \\ -1/6 \\ 1/15\end{bmatrix}\\
+     = \frac{1}{(s+1)(s+3)(s+6)} \implies \text{Poles}\{-1, -3, -6\} \rightarrow \text{BIBO stable}
+    $$
+    ---
+    ### State Space (Lyapunov/Internal) Stability
+    Consider
+    $$
+    \dot{x} = A(t)x + B(t)u\\
+    y = C(t)x + D(t)u\\
+    $$
+    We want to study the natural(zero-input) response
+    $$
+    \dot{x}(t) = A(t)x(t) \rightarrow x(t) = \Phi(t, t_0)x_0
+    $$
+    
+    #### Equilibrium Point $x_e$
+    $$
+    \dot{x}_e = 0 = A(t)x_e \rightarrow x_e \in N(A(t))
+    $$
+    means that system state won't change
+    
+    **Note:** $0$ is always an equilibirum point of a linear system and once we find another $x_e$ 
+    
+    All points on this line will be equilibria 
+    
+    $\implies$ W.L.O.G we assume $x_e = 0$
+    
+    ### Definition
+    $x_e = 0$ is stable $\iff \forall x_0, \forall t_0$ the map $t \to x(t) = \Phi(t, t_0)x_0$ is bounded for all $+ \geq t_0$
+    
+    $\iff ||x(t)||_\infty < M < \infty$
+    
+    #### Definition: Asymptotic Stability
+    $x_e = 0$ is asymptotical $\iff x_e$ stable and $x(t) = \Phi(t, t_0)x_0 \to x_e, t \to \infty$
+    
+    **Note:** asymptotic stability rules out cases of finite escape time!
+    $$
+    x(t) \to \infty \text{ at }t\\
+    \implies x_e \text{ is not stable because there does not exist }M \in R\\
+    \text{such that }||x(t)|| < M, \forall t \geq t_0
+    $$
+    
+    #### Definition: Exponential Stability
+    $x_e = 0$ is exponentially asymptotically stable
+    $$
+    \iff \exists M, \alpha > 0, s.t. \\
+    \leq M \, exp(-\alpha(t-t_0))||x_0||, \quad \forall t \geq t_0\\
+    $$
+    
+    where $\alpha$ is the rate of convergence
+    #### Summary
+    
+    Exponentially Asymptotically Stable $\subset$ Asymptotically Stable $\subset$ Stable
+    """)
+    
+if section == "Week 8":
+    st.title("Week 8")
+    st.header("Lecture 14")
+    st.subheader("Tuesday November 18, 2025")
+    st.markdown(r"""
+    ### State Space Stability (Hesphana Chapter 8)
+    
+    Recall: Exponentially Asymptotically Stable $\subset$ Asymptotically Stable $\subset$ Stable
+    
+    #### Eigenvalue Conditions for stability
+    
+    **Theorem**: 
+    
+    An LTI system $\dot{x} = Ax, x \in R^n$ is 
+    
+    1. Stable $\iff Re\{\lambda_i (A)\}$ OR all the Jordan blocks corresponding to eigenvalues with zero real parts one $|x|$
+    
+    2. Asymboticall Stable $\iff Re\{\lambda_i(A)\} < 0 \quad \forall i$ same for LTI
+    
+    3. Exponential Stability $\iff Re\{\lambda_i(A)\} < 0 \quad \forall i$
+    
+    #### Example (revisited from last lecture)
+    
+    $$
+    A = \begin{bmatrix}
+    -1 & & \\
+    & -3 & \\
+    & & -6
+    \end{bmatrix}
+    
+    \quad
+    
+    B = \begin{bmatrix}
+    1/10\\-1/6 \\1/15
+    \end{bmatrix}
+    
+    \quad
+    
+    C = \begin{bmatrix}1 & 1 & 1\end{bmatrix}
+    $$
+    
+    Eigenvalues $-1, -3, -6 \implies$ exponentially stable
+    
+    Transfer function poles (from last class)
+    $-1, -3, -6 \implies$ same as eigvenvalues for this example
+    
+    #### Example (modified one eigenvalue unstable)
+    
+    $$
+    A = \begin{bmatrix}
+    -1 & & \\
+    & +3 & \\
+    & & -6
+    \end{bmatrix}
+    
+    \quad
+    
+    B = \begin{bmatrix}
+    1/10\\0 \\1/15
+    \end{bmatrix}
+    
+    \quad
+    
+    C = \begin{bmatrix}1 & 1 & 1\end{bmatrix}
+    $$
+    
+    Eigvenvalues: $-1, +3, -6 \implies$ unstable for eigenvalue condition
+    
+    $$
+    \dot{x}_1 = -x_1 + \frac{1}{10}u\\
+    \dot{x}_2 = +3x_2\\
+    \dot{x}_3 = -6x_3 + \frac{1}{15}u
+    $$
+    
+    Would this system be BIBO stable?
+    
+    $$
+    \begin{align*}
+    H(s) &= C(sI - A)^{-1} B\\
+    &= \begin{bmatrix}1 & 1 & 1\end{bmatrix}
+    \begin{bmatrix}
+    s + 1 & & \\
+    & s - 3 & \\
+    & & s + 6
+    \end{bmatrix}
+    \begin{bmatrix}
+    1/10\\0 \\1/15
+    \end{bmatrix}\\
+        
+    &= \begin{bmatrix}1 & 1 & 1\end{bmatrix}
+    \begin{bmatrix}
+    \frac{1}{s + 1} & & \\
+    & \frac{1}{s - 3} & \\
+    & & \frac{1}{s + 6}
+    \end{bmatrix}
+    \begin{bmatrix}
+    1/10\\0 \\1/15
+    \end{bmatrix}\\
+    
+    &= \begin{bmatrix}1 & 1 & 1\end{bmatrix}
+    \begin{bmatrix}
+    \frac{1}{10(s+1)}\\0 \\\frac{1}{15(s+6)}
+    \end{bmatrix}\\
+    
+    &= \frac{1}{10(s+1)} + \frac{1}{15(s+6)}\\ 
+    
+    &= \frac{1}{6}\frac{s+4}{(s+1)(s+6)}
+    
+    \end{align*}
+    $$
+    
+    
+    $\implies \lambda_2 = +3$ diagonalizable as a pole
+    
+    Poles of transfer function are $-1, -6, \implies $ BIBO stable
+    
+    **LTI**
+    $$
+    \dot{x} = Ax + Bu\\
+    y = Cx + Du
+    $$
+    
+    **LTV**
+    $$
+    \dot{x} = A(t)x(t) + B(t) u(t)\\
+    y = C(t) x(t) + D(t) u(t)
+    $$
+    
+    Note: For LTV systmes, $\dot{x} = A(t)x$, there is no connection between $\lambda_i(A(t))$ and stability
+    
+    $\implies$ We need Lyapunov stability theory to address this (and nonlinear) case! ($\to$ 281A)
+    
+    ### Definitions
+    A Lyapunov function $V(x ,t)$ satisfies
+    
+    #### 1) $V(x, t) = 0 \iff x = 0$
+    
+    #### 2) $V(x, t) > \iff x \neq 0$
+    
+    #### 3) $\dot{V}(x, t) < 0$ (negative definite)
+    
+    Lie derivative: derivative of $V(x, t)$along trajectories of $x(t)$
+    
+    """)

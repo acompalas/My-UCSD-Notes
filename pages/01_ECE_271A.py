@@ -11,7 +11,8 @@ section = st.selectbox(
         "Gaussian Classifier",
         "Maximum Likelihood Estimation", 
         "Bias and Variance",
-        "Bayesian Parameter Estimation"
+        "Bayesian Parameter Estimation",
+        "Week 7"
     ],
 )
 
@@ -1983,7 +1984,404 @@ if section == "Bayesian Parameter Estimation":
         - Since each parameter value defines a model
         - This is the expectation over all possible models
         - Each model is weighted by its posterior probability given the training data
+        
+        The predictive distirbution is an average of all these Gaussians
         """)
+
+if section == "Week 7":
+    st.title("Week 7")
+    lecture = st.radio(
+        "Lectures",
+        ["Lecture 13", "Lecture 14"]
+    )
+    
+    if lecture == "Lecture 13":
+        st.header("Lecture 13")
+        st.subheader("Monday November 10, 2025")
+        st.markdown(r"""
+        
+        ### Bayesian Parameter Estimation
+        
+        In MLE the parameter $\Theta$ is just a constant not a random variable
+        $$
+        P(x; \Theta)
+        $$
+        
+        In Bayesian Methods, $\theta$ is now a random variable
+        $$
+        P(x|\theta)
+        $$
+        
+        The goal is to compute the posterior distribution
+        $$
+        P(\theta|D)
+        $$
+        
+        ### Bayes vs ML
+        Because we compute the entire distribution over the parameters, we get a complete characterization of what the random variable is such as the uncertainty
+        
+        Maximum likelihood is always about the "best estimate" but under Bayes there is no "best estimate" because we compute the entire distribution
+        
+        We care about the model not the parameters themselves
+        
+        One limitation of Maximum Likelihood is when we compute the best estimate, some information is lost
+        
+        With Bayesian estimation, predicted distribution is conditioned on the entire training set
+        
+        #### Maximum Likelihood Procedure
+        $$
+        i^*(x) = \text{argmax}_i P_{X|Y}(x|i;\theta_i^*)P_Y(i)\\
+        \text{where }\theta_i^* = \text{argmax}P(D|i, \theta)
+        $$
+        
+        #### Bayesian BDR
+        Under the bayesian framework, everything is conditioned on the training data
+        $$
+        i^*(x) = \text{argmax}_i P_{X|Y, T}(x|i, D_i)P_Y(i)
+        $$
+        
+        this probability distribution can be simplified with the marginalization equation
+        $$
+        P_{X|Y, T}(x|i, D_i) = \int P_{X|\Theta, Y, T}(x|\theta, i, D_i)P_{\Theta|Y, T}(\theta|i, D_i)d\theta
+        $$
+        when the parameter value is known $x$ no longer depends on $T$ e.g. $X|\Theta ~ N(\theta, \sigma^2)$
+        $$
+        \boxed{
+        P_{X|Y, T}(x|i, D_i) = \int P_{X|\Theta, Y}(x | \theta, i)P_{\Theta|Y, T}(\theta|i, D_i)d\theta
+        }
+        $$
+        
+        The process overall is pick $i$ if
+        
+        $$
+        \boxed{
+        i^*(x) = \text{argmax}_i P_{X|Y, T}(x|i, D_i)P_Y(i)
+        }\\
+        \text{where }P_{X|Y, T}(x|i, D_i) = \int P_{X|\Theta, Y}(x | \theta, i)P_{\Theta|Y, T}(\theta|i, D_i)d\theta
+        $$
+        
+        #### The predictive distribution
+        More generally
+        $$
+        P_{X|T}(x|D) = \int P_{X|\Theta}(x|\theta)P_{\Theta|T}(\theta|D)d\theta
+        $$
+        is known as the predictive distribution
+        $$
+        P_{X|T}(x|D) = E_{\Theta|T}P_{X|\Theta}(x|\theta)|T = D]
+        $$
+        We average the models weighted by weights derived from the data
+        
+        #### Bayes vs. MLE
+        - MLE: pick one model
+        - Bayes: average all models
+        
+        Are Bayesian predictions very differnt than those of MLE?
+        - They can be, unless the posterior is very narrow
+        
+        Hence, MLE can be seen as a special case of Bayes
+        - when you are very confident about the model
+        - picking one is good enough
+        
+        If the dataset is very large, we are more likely to be in the case where MLE ~ Bayes
+        
+        As you add more and more data, the posterior becomes very narrow
+        
+        Bayesian Formalism can make a big difference if you don't have alot of data
+        
+        You can encode information about the problem in the prior, but if you choose a prior that is wrong the problem becomes misguided
+        
+        #### MAP Approximation
+        
+        Given that Bayesian is much more powerful why use MLE at all?
+        
+        The main problem with Bayes is that the integral
+        $$
+        P_{X|T}(x|D)= \int P_{X|\Theta}(x|\theta)P_{\Theta|T}(\theta|D)d\theta
+        $$
+        - in practice, one is frequently forced to use approximations
+        - one possibility is to do something similar to MLE, i.e. pick only one model
+        - This can be made to account for the prior by picking the model that has the largest posterior probability given the training data
+        $$
+        \theta_{MAP}= \text{argmax}_\theta P_{\Theta|T}(\theta|D)
+        \boxed{
+            = \text{argmax}_\theta P_{T|\Theta}(D|\theta)P_\Theta(\theta)
+        }
+        $$
+        
+        In this case
+        $$
+        P_{X|T}(x|D)= \int P_{X|\Theta}(x|\theta)\delta(\theta - \theta_{MAP})d\theta\\
+        \boxed{
+            = P_{X|\Theta}(x|\theta_{MAP})
+        }
+        $$
+        
+        The BDR becomes
+        - pick i if
+        $$
+        i^*(x) = \text{argmax} P_{X|Y}(x|i;\theta_i^{MAP})P_Y(i)\\
+        \text{where } \theta_i^{MAP} = \text{argmax}_\theta P_{T|Y;\Theta}(D| i, \theta)P_{\Theta|Y}(\theta|i)
+        $$
+        when compared ot the MLE, this has the advantage of still accounting for the prior (although only approximately)
+        
+        #### MAP vs MLE
+        
+        MLE-BDR
+        $$
+        \boxed{
+        i^*(x) = \text{argmax}_i P_{X|Y}(x|i;\theta^*)P_Y(i)
+        }\\
+        \boxed{
+        \text{where }\theta_i^* = \text{argmax} P_{X|Y}(D|i, \theta)
+        }
+        $$
+        
+        Bayes MAP-BDR
+        $$
+        \boxed{
+        i^*(x) = \text{argmax}_i P_{X|Y}(x|i;\theta_i^{MAP})P_Y(i)
+        }\\
+        \boxed{
+        \text{where } \theta_i^{MAP} = \text{argmax}_\theta P_{T|Y, \Theta}(D|i, \theta)P_{\Theta|Y}(\theta|i)
+        }
+        $$
+        The difference is non-negligible only when the dataset is small
+        
+        #### The Laplace approximation
+        This is a method for approximating any distribution $P_x(x)$
+        
+        Approximating the probability distribution by a Gaussian
+        
+        Lets assume that
+        $$
+        P_X(x) = \frac{1}{Z}g(x)
+        $$
+        where $Z$ is the normalization constant
+        
+        We take the Taylor series approximation of $g(x)$ around its maximum
+        
+        $$
+        log(g(x)) = log \, g(x_0) - c/2(x-x_0)^2 + \dots
+        $$
+        The first order term is zero because $x_0$ is a maximum
+        
+        with
+        $$
+        c = -\frac{\partial^2}{\partial x^2}log \, g(x)|_{x=x_0}
+        $$
+        and we approximate $g(x)$ by an unormalized Gaussian
+        $$
+        g'(x) = g(x_0)exp{-c/2 (x-x_0)^2}
+        $$
+        and then compute the normalization constant
+        $$
+        Z = g(x_0)\sqrt{\frac{2\pi}{c}}
+        $$
+        
+        This can also be done with the multivariate case.
+        
+        In physics, this is also called the saddle-point approximation
+        
+        Note that the approximation can be made for the predictive distribution or the parameter posterior
+        $$
+        P_{X|Y}(x|D) = G(x, x^*, A_{X|T})
+        $$
+        $$
+        P_{\Theta|T}(\theta|D)=G(\theta, \theta_{MAP}, A_{\Theta|T})
+        $$
+        In which case
+        $$
+        P_{X|T}(x|D) = \int P_{X|\Theta}(G(\theta, \theta_{MAP}, A_{\Theta|T})d\theta
+        $$
+        This is clearly superior to the MAP approximation
+        $$
+        P_{X|T}(x|D) = \int P_{X|\Theta}(x|\theta)\delta(\theta-\theta_{MAP})d\theta
+        $$
+        
+        #### Other methods
+        Variational Approximation
+        - find lower bound with tunable parameters and optimize lower bound
+        
+        Sampling Methods
+        - design markov chain which in equlibrium converges to the probability distribution you are trying to model
+        
+        #### Example
+        $$
+        \mu_n = \alpha_n \hat{\mu} + (1 - \alpha_n)\mu_0
+        $$
+        """)
+
+    if lecture == "Lecture 14":
+        st.header("Lecture 14")
+        st.subheader("Wednesday November 12, 2025")
+        st.markdown(r"""
+        
+        ### Review
+        
+        Optimal decision rule is to threshold the x at zero
+        $$
+        x < \frac{\mu_0 + (-\mu_0)}{2} = 0
+        $$
+        
+        We have large variance if $n$ is small
+        $$
+        \mu = \frac{1}{n}\sum_i X_i
+        $$
+        
+        Result: the estimate is different than the true $\mu_0$
+        
+        What we can do is introduce prior belief of the system
+        $$
+        \mu ~ N(\mu_0, \sigma^2)\\
+        X ~ N(\hat{\mu}, \sigma^2)\\
+        \mu_n = f(\hat{\mu}, \mu_0, n)\\
+        \mu_n \approx f(\hat{\mu})\quad \text{large }n\\
+        \mu_n \approx f(\mu_0)\quad \text{small }n\\
+        \boxed{
+            
+            \mu_n = \alpha_n\hat{\mu} + (1-\alpha_n)\mu_0
+        }\\
+        \alpha_n \in [0, 1], \quad \underbrace{\alpha_n \to 1}_{n\to \infty}\quad \underbrace{\alpha_n \to 0}_{n\to 0}
+        $$
+        
+        ### Bayesian Solution
+        Gaussian Likelihood
+        $$
+        P_{T|\mu}(D|\mu) = G(D, \mu, \sigma^2)\quad \sigma \text{ is known}
+        $$
+        
+        Gaussian Prior (what we know)
+        $$
+        P_\mu{\mu} = G(\mu, \mu_0, \sigma_0^2)
+        $$
+        
+        We ned to compute posterior distribution for $\mu$
+        $$
+        P_{\mu|T}(\mu|D) = \frac{P_{T|\mu}(D|\mu)P_\mu(\mu)}{P_T(D)}
+        $$
+        
+        Note
+        - This is a probability density
+        - Ignore constants that do not depend on $\mu$
+        - Normalize when done
+        $$
+        P{\mu|T}(\mu|D) \propto P_{T|\mu}(D|\mu)P_\mu(\mu) \propto \prod_i P_{X|\mu}(x_i |\mu)P_\mu(\mu)
+        $$
+        
+        Plugging in the Gaussians
+        $$
+        \boxed{
+        \begin{align*}
+        &\propto \prod_i G(x_i, \mu, \sigma^2)G(\mu, \mu_0, \sigma_0^2)\\
+        &\propto exp\{-\sum_i \frac{(x_i - \mu)^2}{2\sigma^2} - \frac{(\mu-\mu_0)^2}{2\sigma_0^2}\}\\
+        &\propto exp\{-\sum_i \frac{\mu^2 - 2x_i \mu + x_i^2}{2\sigma^2} - \frac{\mu^2 -2\mu \mu_0 + \mu_0^2}{2\sigma_0^2}\}\\
+        &\propto exp\left\{-\left(\frac{n}{2\sigma^2} + \frac{1}{2\sigma_0^2}\right)\mu^2 + 
+        2\left(\frac{\sum_i x_i}{2\sigma^2} + \frac{\mu_0}{2\sigma_0^2}\right)\mu 
+        - \left(\frac{\sum_i x_i^2}{2\sigma^2} + \frac{\mu_0^2}{2\sigma_0^2}\right)\right\}
+        \end{align*}
+        }
+        $$
+        
+        Drop terms not depending on $\mu$
+        $$
+        P_{\mu|T}(\mu|D) \propto exp\left\{-\left(\frac{n}{2\sigma^2} + \frac{1}{2\sigma_0^2}\right)
+        +2\left(\frac{\sum_i x_i}{2\sigma^2} + \frac{\mu_0}{2\sigma_0^2}\mu\right)\right\}
+        $$
+        
+        Complete the square
+        $$
+        \boxed{
+        ax^2 + 2bx + c = a(x + \frac{b}{a})^2 + c - \frac{b^2}{a} \propto a(x+\frac{b}{a})^2
+        }
+        $$
+        
+        We have
+        $$
+        P_{\mu|T}(\mu|D) \propto exp\left\{-\left(\frac{n}{2\sigma^2}+\frac{1}{2\sigma_0^2}\right)
+        \left[\mu - \frac{\left(\frac{\sum_i x_i}{2\sigma^2} + \frac{\mu_0}{2\sigma^2}\right)}{\left(\frac{n}{2\sigma^2}+\frac{1}{2\sigma_0^2}\right)}\right]\right\}
+        $$
+        
+        Using
+        $$
+        \frac{1}{\left(\frac{n}{2\sigma^2} + \frac{1}{2\sigma_0^2}\right)} = \frac{2\sigma^2 \sigma_0^2}{(\sigma^2 + n \sigma_0^2)}
+        $$
+        
+        we have
+        $$
+        P_{\mu|T}(\mu|D) \propto exp\left\{-\left(\frac{2\sigma^2 \sigma_0^2}{\sigma^2 + n\sigma_0^2}\right)^{-1}
+        \left[\mu - \left(\frac{\sigma_0^2 \sum_i x_i + \mu_0 \sigma^2}{\sigma^2 + n\sigma_0^2}\right)\right]^2\right\}
+        $$
+        And
+        $$
+        \boxed{
+        P_{\mu|T}(\mu|D) = G(\mu, \mu_n, \sigma_n^2), \quad \mu_n = \frac{\sigma_0^2 \sum_i x_i + \mu_0 \sigma^2}{\sigma^2 + n \sigma_0^2}, \quad \sigma_n^2 = \left(\frac{\sigma^2 \sigma_0^2}{\sigma^2 + n \sigma_0^2}\right)
+        }
+        $$
+        
+        $$
+        \mu_n = \frac{\sigma_0^2 \sum_i x_i + \mu_0 \sigma^2}{\sigma^2} \\
+        \implies \mu_n = \frac{n\sigma_0^2}{\underbrace{\sigma^2 + n \sigma_0^2}_{\alpha_n}}\mu_{ML} + \frac{\sigma^2}{\underbrace{\sigma^2 + n \sigma_0^2}_{1-\alpha_n}}\mu_0
+        $$
+        
+        $$
+        \sigma_n^2 = \left(\frac{\sigma^2 \sigma_0^2}{\sigma^2 + n \sigma_0^2}\right) \implies \boxed{\frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}}
+        $$
+        
+        The precision of the posteriori distribution is the sum of these two precisions
+        
+        we can compare with our intuitive solution
+        $$
+        \boxed{
+            
+            \mu_n = \alpha_n\hat{\mu} + (1-\alpha_n)\mu_0
+        }\\
+        \alpha_n \in [0, 1], \quad \underbrace{\alpha_n \to 1}_{n\to \infty}\quad \underbrace{\alpha_n \to 0}_{n\to 0}
+        $$
+        
+        The Bayesian Solution is
+        $$
+        \mu_n = \frac{n\sigma_0^2}{\sigma^2 + n \sigma_0^2}\mu_{ML} + \frac{\sigma^2}{\sigma^2 + n \sigma_0^2}\mu_0
+        $$
+        
+        Weighting constants
+        $$
+        \boxed{
+            \alpha_n = \frac{n\sigma_0^2}{\sigma^2 + n\sigma_0^2}
+        }
+        $$
+        When you have infinite data, your Bayesian estimate becomes like the Maximum Likelihood estimate
+        
+        The precision of the Bayesian Estimate is always larger than the precision of the Maximum Likelihood Estiamte
+        $$
+        \boxed{
+            \frac{1}{\sigma_n^2} = \frac{1}{\sigma_0^2} + \frac{n}{\sigma^2}
+        }
+        $$
+        
+        This is becasue the prior is constraining the parameter estimate for variance
+        s
+        $$
+        P_{\text{Bayes}} = P_{\text{MLE}} + P_{\text{prior}}
+        $$
+        
+        If we are uncertain $\sigma_0 >> \sigma^2$ then $\mu_n = \mu_{ML}$
+        
+        If we are certain apriori then $\mu_n = \mu_0$
+        
+        #### In summary
+        Bayesian Estimate combines the prior beliefs with the evidence provided by the data
+    
+        ### Properties
+        
+        Regularization in Bayes is constraining the estimate to the data
+        
+        ### Conjugate priors
+        
+        Model doesn't have to be gaussian.
+        
+        When you have a prior and run it through a Bayes model and when then posterior are in the same family then the prior is called a conjugate prior 
+        """)
+
 # regime =  st.radio("", ["Classification", "Regression"])
 
 # if regime == "Classification":
